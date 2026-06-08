@@ -1,0 +1,56 @@
+# Delphi 编译输出
+*.exe
+*.dll
+*.bpl
+*.dcp
+*.dcu
+*.rsm
+*.map
+*.tds
+*.o
+*.obj
+
+# 资源文件（保留 .dpk 需要的）
+*.res
+!SkiaVclControls.res
+
+# Delphi 本地配置
+*.local
+*.identcache
+*.tvsconfig
+*.dsk
+*.~*
+*.cfg
+*.dof
+*.ddp
+
+# 备份和历史目录
+__history/
+__recovery/
+
+# IDE 特定
+.superpowers/
+
+# 输出目录
+Win32/
+Win64/
+Debug/
+Release/
+Sources/Win32/
+Sources/Win64/
+
+# 系统文件
+Thumbs.db
+desktop.ini
+.DS_Store
+
+# 日志和临时文件
+*.log
+*.tmp
+*.temp
+
+# 项目内部文档
+PROJECT.md
+
+# 文档目录
+docs/

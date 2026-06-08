@@ -1,0 +1,56 @@
+package SkiaVclControlsFree;
+
+{$R *.res}
+{$IFDEF IMPLICITBUILDING This IFDEF should not be used by users}
+{$ALIGN 8}
+{$ASSERTIONS ON}
+{$BOOLEVAL OFF}
+{$DEBUGINFO OFF}
+{$EXTENDEDSYNTAX ON}
+{$IMPORTEDDATA ON}
+{$IOCHECKS ON}
+{$LOCALSYMBOLS ON}
+{$LONGSTRINGS ON}
+{$OPENSTRINGS ON}
+{$OPTIMIZATION OFF}
+{$OVERFLOWCHECKS ON}
+{$RANGECHECKS ON}
+{$REFERENCEINFO ON}
+{$SAFEDIVIDE OFF}
+{$STACKFRAMES ON}
+{$TYPEDADDRESS OFF}
+{$VARSTRINGCHECKS ON}
+{$WRITEABLECONST OFF}
+{$MINENUMSIZE 1}
+{$IMAGEBASE $400000}
+{$DEFINE DEBUG}
+{$ENDIF IMPLICITBUILDING}
+{$DESCRIPTION 'SkiaVclControlsFree - Material Design VCL Controls'}
+{$IMPLICITBUILD ON}
+
+requires
+  Skia.Package.RTL,
+  rtl,
+  vcl,
+  vclactnband,
+  vclx,
+  xmlrtl,
+  Skia.Package.VCL;
+
+contains
+  SkiaVclControls.Types in 'Sources\SkiaVclControls.Types.pas',
+  SkiaVclControls.Base in 'Sources\SkiaVclControls.Base.pas',
+  SkiaVclControls.Compositor in 'Sources\SkiaVclControls.Compositor.pas',
+  SkiaVclControls.Button in 'Sources\SkiaVclControls.Button.pas',
+  SkiaVclControls.Panel in 'Sources\SkiaVclControls.Panel.pas',
+  SkiaVclControls.ButtonGroup in 'Sources\SkiaVclControls.ButtonGroup.pas',
+  SkiaVclControls.Radio in 'Sources\SkiaVclControls.Radio.pas',
+  SkiaVclControls.RadioGroup in 'Sources\SkiaVclControls.RadioGroup.pas',
+  SkiaVclControls.Checkbox in 'Sources\SkiaVclControls.Checkbox.pas',
+  SkiaVclControls.CheckboxGroup in 'Sources\SkiaVclControls.CheckboxGroup.pas',
+  SkiaVclControls.Switch in 'Sources\SkiaVclControls.Switch.pas',
+  SkiaVclControls.SwitchGroup in 'Sources\SkiaVclControls.SwitchGroup.pas',
+  SkiaVclControls.MUIHelper in 'Sources\SkiaVclControls.MUIHelper.pas',
+  SkiaVclControls.Register in 'Sources\SkiaVclControls.Register.pas';
+
+end.

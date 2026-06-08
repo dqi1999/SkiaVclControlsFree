@@ -1,0 +1,752 @@
+object FrameLabelDemo: TFrameLabelDemo
+  Left = 0
+  Top = 0
+  Width = 1024
+  Height = 640
+  Color = clBtnFace
+  ParentColor = False
+  TabOrder = 0
+  object pnlHeader: TDSkPanel
+    Left = 0
+    Top = 0
+    Width = 1024
+    Height = 64
+    Align = alTop
+    Caption = 'Label Component Demo'
+    CaptionPosition = cpLeftCenter
+    CaptionFont.Charset = DEFAULT_CHARSET
+    CaptionFont.Color = clWindowText
+    CaptionFont.Height = -27
+    CaptionFont.Name = 'Microsoft YaHei UI'
+    CaptionFont.Style = [fsBold]
+    CaptionMargin = 24.000000000000000000
+    ChildPadding = 8.000000000000000000
+    BackgroundHover = xFFFFFFFF
+    PanelStyle = psSurface
+    CornerRadius = 0.000000000000000000
+    BackgroundColor = xFFFFFFFF
+    BorderColor = x00FFFFFF
+    BorderWidth = 0.000000000000000000
+  end
+  object pnlControl: TDSkPanel
+    Left = 0
+    Top = 64
+    Width = 280
+    Height = 576
+    Align = alLeft
+    Caption = ''
+    CaptionPosition = cpTopLeft
+    CaptionFont.Charset = DEFAULT_CHARSET
+    CaptionFont.Color = clWindowText
+    CaptionFont.Height = -12
+    CaptionFont.Name = 'Microsoft YaHei UI'
+    CaptionFont.Style = []
+    CaptionMargin = 8.000000000000000000
+    ChildPadding = 16.000000000000000000
+    BackgroundHover = xFFF7FAFF
+    PanelStyle = psElevated
+    CornerRadius = 12.000000000000000000
+    BackgroundColor = xFFF7FAFF
+    BorderColor = xFFE2E8F0
+    BorderWidth = 1.000000000000000000
+    object lblControlTitle: TDSkLabel
+      Left = 24
+      Top = 22
+      Width = 220
+      Height = 30
+      Caption = 'TDSkLabel Effects'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -20
+      Font.Name = 'Microsoft YaHei UI'
+      Font.Style = [fsBold]
+      AutoSize = False
+      ColorScheme = muiSchemeNone
+      FontColor = xFF0F172A
+      TextEffect = lteSolid
+      GradientStartColor = xFF1976D2
+      GradientEndColor = xFF42A5F5
+      GradientDirection = lgdHorizontal
+      FillEnabled = True
+      StrokeEnabled = False
+      StrokeColor = xFFFFFFFF
+      StrokeWidth = 1.000000000000000000
+      ShadowEnabled = False
+      ShadowColor = x60000000
+      ShadowBlur = 4.000000000000000000
+      ShadowOffsetX = 0.000000000000000000
+      ShadowOffsetY = 2.000000000000000000
+      TextAlign = ltaLeft
+      VerticalAlign = lvaCenter
+      CornerRadius = 0.000000000000000000
+      BackgroundColor = claNull
+      BorderColor = claNull
+      BorderWidth = 0.000000000000000000
+    end
+    object lblControlDesc: TDSkLabel
+      Left = 24
+      Top = 56
+      Width = 220
+      Height = 48
+      Caption = 'Skia text rendering makes these effects native to the component.'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -12
+      Font.Name = 'Microsoft YaHei UI'
+      Font.Style = []
+      AutoSize = False
+      ColorScheme = muiSchemeNone
+      FontColor = xFF64748B
+      TextEffect = lteSolid
+      GradientStartColor = xFF1976D2
+      GradientEndColor = xFF42A5F5
+      GradientDirection = lgdHorizontal
+      FillEnabled = True
+      StrokeEnabled = False
+      StrokeColor = xFFFFFFFF
+      StrokeWidth = 1.000000000000000000
+      ShadowEnabled = False
+      ShadowColor = x60000000
+      ShadowBlur = 4.000000000000000000
+      ShadowOffsetX = 0.000000000000000000
+      ShadowOffsetY = 2.000000000000000000
+      TextAlign = ltaLeft
+      VerticalAlign = lvaCenter
+      CornerRadius = 0.000000000000000000
+      BackgroundColor = claNull
+      BorderColor = claNull
+      BorderWidth = 0.000000000000000000
+    end
+    object lblPropGradientName: TDSkLabel
+      Left = 24
+      Top = 122
+      Width = 220
+      Height = 24
+      Caption = 'Gradient fill'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -13
+      Font.Name = 'Microsoft YaHei UI'
+      Font.Style = [fsBold]
+      AutoSize = False
+      ColorScheme = muiSchemeNone
+      FontColor = xFF334155
+      TextAlign = ltaLeft
+      VerticalAlign = lvaCenter
+      BackgroundColor = claNull
+      BorderColor = claNull
+      BorderWidth = 0.000000000000000000
+    end
+    object lblPropGradientValue: TDSkLabel
+      Left = 24
+      Top = 144
+      Width = 220
+      Height = 34
+      Caption = 'TextEffect + GradientStart/EndColor'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -12
+      Font.Name = 'Microsoft YaHei UI'
+      Font.Style = []
+      AutoSize = False
+      ColorScheme = muiSchemeNone
+      FontColor = xFF64748B
+      TextAlign = ltaLeft
+      VerticalAlign = lvaCenter
+      BackgroundColor = claNull
+      BorderColor = claNull
+      BorderWidth = 0.000000000000000000
+    end
+    object lblPropOutlineName: TDSkLabel
+      Left = 24
+      Top = 192
+      Width = 220
+      Height = 24
+      Caption = 'Outline text'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -13
+      Font.Name = 'Microsoft YaHei UI'
+      Font.Style = [fsBold]
+      AutoSize = False
+      ColorScheme = muiSchemeNone
+      FontColor = xFF334155
+      TextAlign = ltaLeft
+      VerticalAlign = lvaCenter
+      BackgroundColor = claNull
+      BorderColor = claNull
+      BorderWidth = 0.000000000000000000
+    end
+    object lblPropOutlineValue: TDSkLabel
+      Left = 24
+      Top = 214
+      Width = 220
+      Height = 34
+      Caption = 'StrokeEnabled + FillEnabled=False'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -12
+      Font.Name = 'Microsoft YaHei UI'
+      Font.Style = []
+      AutoSize = False
+      ColorScheme = muiSchemeNone
+      FontColor = xFF64748B
+      TextAlign = ltaLeft
+      VerticalAlign = lvaCenter
+      BackgroundColor = claNull
+      BorderColor = claNull
+      BorderWidth = 0.000000000000000000
+    end
+    object lblPropGlowName: TDSkLabel
+      Left = 24
+      Top = 262
+      Width = 220
+      Height = 24
+      Caption = 'Soft glow'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -13
+      Font.Name = 'Microsoft YaHei UI'
+      Font.Style = [fsBold]
+      AutoSize = False
+      ColorScheme = muiSchemeNone
+      FontColor = xFF334155
+      TextAlign = ltaLeft
+      VerticalAlign = lvaCenter
+      BackgroundColor = claNull
+      BorderColor = claNull
+      BorderWidth = 0.000000000000000000
+    end
+    object lblPropGlowValue: TDSkLabel
+      Left = 24
+      Top = 284
+      Width = 220
+      Height = 34
+      Caption = 'ShadowEnabled + ShadowBlur'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -12
+      Font.Name = 'Microsoft YaHei UI'
+      Font.Style = []
+      AutoSize = False
+      ColorScheme = muiSchemeNone
+      FontColor = xFF64748B
+      TextAlign = ltaLeft
+      VerticalAlign = lvaCenter
+      BackgroundColor = claNull
+      BorderColor = claNull
+      BorderWidth = 0.000000000000000000
+    end
+    object lblPropAlignName: TDSkLabel
+      Left = 24
+      Top = 332
+      Width = 220
+      Height = 24
+      Caption = 'Alignment'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -13
+      Font.Name = 'Microsoft YaHei UI'
+      Font.Style = [fsBold]
+      AutoSize = False
+      ColorScheme = muiSchemeNone
+      FontColor = xFF334155
+      TextAlign = ltaLeft
+      VerticalAlign = lvaCenter
+      BackgroundColor = claNull
+      BorderColor = claNull
+      BorderWidth = 0.000000000000000000
+    end
+    object lblPropAlignValue: TDSkLabel
+      Left = 24
+      Top = 354
+      Width = 220
+      Height = 34
+      Caption = 'TextAlign + VerticalAlign'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -12
+      Font.Name = 'Microsoft YaHei UI'
+      Font.Style = []
+      AutoSize = False
+      ColorScheme = muiSchemeNone
+      FontColor = xFF64748B
+      TextAlign = ltaLeft
+      VerticalAlign = lvaCenter
+      BackgroundColor = claNull
+      BorderColor = claNull
+      BorderWidth = 0.000000000000000000
+    end
+    object lblPropDisabledName: TDSkLabel
+      Left = 24
+      Top = 402
+      Width = 220
+      Height = 24
+      Caption = 'Disabled state'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -13
+      Font.Name = 'Microsoft YaHei UI'
+      Font.Style = [fsBold]
+      AutoSize = False
+      ColorScheme = muiSchemeNone
+      FontColor = xFF334155
+      TextAlign = ltaLeft
+      VerticalAlign = lvaCenter
+      BackgroundColor = claNull
+      BorderColor = claNull
+      BorderWidth = 0.000000000000000000
+    end
+    object lblPropDisabledValue: TDSkLabel
+      Left = 24
+      Top = 424
+      Width = 220
+      Height = 34
+      Caption = 'Enabled=False keeps visual priority'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -12
+      Font.Name = 'Microsoft YaHei UI'
+      Font.Style = []
+      AutoSize = False
+      ColorScheme = muiSchemeNone
+      FontColor = xFF64748B
+      TextAlign = ltaLeft
+      VerticalAlign = lvaCenter
+      BackgroundColor = claNull
+      BorderColor = claNull
+      BorderWidth = 0.000000000000000000
+    end
+    object pnlControlBadge: TDSkPanel
+      Left = 24
+      Top = 488
+      Width = 220
+      Height = 70
+      Caption = ''
+      CaptionPosition = cpTopLeft
+      ChildPadding = 0.000000000000000000
+      BackgroundHover = xFFEFF6FF
+      PanelStyle = psStyleNone
+      CornerRadius = 18.000000000000000000
+      BackgroundColor = xFFEFF6FF
+      BorderColor = xFFD9EAFB
+      BorderWidth = 1.000000000000000000
+      object lblControlBadge: TDSkLabel
+        Left = 18
+        Top = 12
+        Width = 184
+        Height = 42
+        Caption = 'Gradient'
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -24
+        Font.Name = 'Microsoft YaHei UI'
+        Font.Style = [fsBold]
+        AutoSize = False
+        ColorScheme = muiSchemeNone
+        FontColor = xFF1976D2
+        TextEffect = lteGradient
+        GradientStartColor = xFF0EA5E9
+        GradientEndColor = xFF22C55E
+        GradientDirection = lgdHorizontal
+        TextAlign = ltaCenter
+        VerticalAlign = lvaCenter
+        BackgroundColor = claNull
+        BorderColor = claNull
+        BorderWidth = 0.000000000000000000
+      end
+    end
+  end
+  object pnlPreview: TDSkPanel
+    Left = 280
+    Top = 64
+    Width = 744
+    Height = 576
+    Align = alClient
+    Caption = ''
+    CaptionPosition = cpTopLeft
+    CaptionFont.Charset = DEFAULT_CHARSET
+    CaptionFont.Color = clWindowText
+    CaptionFont.Height = -12
+    CaptionFont.Name = 'Microsoft YaHei UI'
+    CaptionFont.Style = []
+    CaptionMargin = 8.000000000000000000
+    ChildPadding = 24.000000000000000000
+    BackgroundHover = xFFF8FAFC
+    PanelStyle = psOutlined
+    CornerRadius = 12.000000000000000000
+    BackgroundColor = xFFF8FAFC
+    BorderColor = xFFE2E8F0
+    BorderWidth = 1.000000000000000000
+    object lblPreviewTitle: TDSkLabel
+      Left = 32
+      Top = 22
+      Width = 260
+      Height = 30
+      Caption = 'Visual samples'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -20
+      Font.Name = 'Microsoft YaHei UI'
+      Font.Style = [fsBold]
+      AutoSize = False
+      ColorScheme = muiSchemeNone
+      FontColor = xFF0F172A
+      TextAlign = ltaLeft
+      VerticalAlign = lvaCenter
+      BackgroundColor = claNull
+      BorderColor = claNull
+      BorderWidth = 0.000000000000000000
+    end
+    object cardHero: TDSkPanel
+      Left = 32
+      Top = 62
+      Width = 660
+      Height = 128
+      Caption = ''
+      CaptionPosition = cpTopLeft
+      ChildPadding = 0.000000000000000000
+      BackgroundHover = xFFFFFFFF
+      PanelStyle = psStyleNone
+      CornerRadius = 18.000000000000000000
+      BackgroundColor = xFFFFFFFF
+      BorderColor = xFFE2E8F0
+      BorderWidth = 1.000000000000000000
+      object lblHeroTitle: TDSkLabel
+        Left = 24
+        Top = 14
+        Width = 600
+        Height = 62
+        Caption = 'Design with Skia'
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -43
+        Font.Name = 'Microsoft YaHei UI'
+        Font.Style = [fsBold]
+        AutoSize = False
+        ColorScheme = muiSchemeNone
+        FontColor = xFF1976D2
+        TextEffect = lteGradient
+        GradientStartColor = xFF0EA5E9
+        GradientEndColor = xFF22C55E
+        GradientDirection = lgdDiagonalDown
+        FillEnabled = True
+        StrokeEnabled = False
+        StrokeColor = xFFFFFFFF
+        StrokeWidth = 1.000000000000000000
+        ShadowEnabled = True
+        ShadowColor = x330EA5E9
+        ShadowBlur = 8.000000000000000000
+        ShadowOffsetX = 0.000000000000000000
+        ShadowOffsetY = 4.000000000000000000
+        TextAlign = ltaCenter
+        VerticalAlign = lvaCenter
+        BackgroundColor = claNull
+        BorderColor = claNull
+        BorderWidth = 0.000000000000000000
+      end
+      object lblHeroDesc: TDSkLabel
+        Left = 42
+        Top = 84
+        Width = 560
+        Height = 24
+        Caption = 'Gradient fill, soft shadow and AutoSize-safe effect padding'
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -13
+        Font.Name = 'Microsoft YaHei UI'
+        Font.Style = []
+        AutoSize = False
+        ColorScheme = muiSchemeNone
+        FontColor = xFF64748B
+        TextAlign = ltaCenter
+        VerticalAlign = lvaCenter
+        BackgroundColor = claNull
+        BorderColor = claNull
+        BorderWidth = 0.000000000000000000
+      end
+    end
+    object cardOutline: TDSkPanel
+      Left = 32
+      Top = 210
+      Width = 318
+      Height = 138
+      Caption = ''
+      CaptionPosition = cpTopLeft
+      ChildPadding = 0.000000000000000000
+      BackgroundHover = xFFF8FAFC
+      PanelStyle = psStyleNone
+      CornerRadius = 18.000000000000000000
+      BackgroundColor = xFFF8FAFC
+      BorderColor = xFFE2E8F0
+      BorderWidth = 1.000000000000000000
+      object lblOutlineCaption: TDSkLabel
+        Left = 20
+        Top = 14
+        Width = 250
+        Height = 24
+        Caption = 'Outline / hollow'
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -13
+        Font.Name = 'Microsoft YaHei UI'
+        Font.Style = [fsBold]
+        AutoSize = False
+        ColorScheme = muiSchemeNone
+        FontColor = xFF64748B
+        TextAlign = ltaLeft
+        VerticalAlign = lvaCenter
+        BackgroundColor = claNull
+        BorderColor = claNull
+        BorderWidth = 0.000000000000000000
+      end
+      object lblOutline: TDSkLabel
+        Left = 20
+        Top = 44
+        Width = 270
+        Height = 58
+        Caption = 'OUTLINE'
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -39
+        Font.Name = 'Microsoft YaHei UI'
+        Font.Style = [fsBold]
+        AutoSize = False
+        ColorScheme = muiSchemeNone
+        FontColor = xFF0F172A
+        TextEffect = lteSolid
+        FillEnabled = False
+        StrokeEnabled = True
+        StrokeColor = xFF0F172A
+        StrokeWidth = 2.300000000000000000
+        TextAlign = ltaCenter
+        VerticalAlign = lvaCenter
+        BackgroundColor = claNull
+        BorderColor = claNull
+        BorderWidth = 0.000000000000000000
+      end
+    end
+    object cardNeon: TDSkPanel
+      Left = 374
+      Top = 210
+      Width = 318
+      Height = 138
+      Caption = ''
+      CaptionPosition = cpTopLeft
+      ChildPadding = 0.000000000000000000
+      BackgroundHover = xFF06131F
+      PanelStyle = psStyleNone
+      CornerRadius = 18.000000000000000000
+      BackgroundColor = xFF06131F
+      BorderColor = xFF17324A
+      BorderWidth = 1.000000000000000000
+      object lblNeonCaption: TDSkLabel
+        Left = 20
+        Top = 14
+        Width = 250
+        Height = 24
+        Caption = 'Glow shadow'
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -13
+        Font.Name = 'Microsoft YaHei UI'
+        Font.Style = [fsBold]
+        AutoSize = False
+        ColorScheme = muiSchemeNone
+        FontColor = xFF93C5FD
+        TextAlign = ltaLeft
+        VerticalAlign = lvaCenter
+        BackgroundColor = claNull
+        BorderColor = claNull
+        BorderWidth = 0.000000000000000000
+      end
+      object lblNeon: TDSkLabel
+        Left = 20
+        Top = 42
+        Width = 270
+        Height = 62
+        Caption = 'NEON'
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -43
+        Font.Name = 'Microsoft YaHei UI'
+        Font.Style = [fsBold]
+        AutoSize = False
+        ColorScheme = muiSchemeNone
+        FontColor = xFF38BDF8
+        TextEffect = lteGradient
+        GradientStartColor = xFF38BDF8
+        GradientEndColor = xFF34D399
+        GradientDirection = lgdHorizontal
+        ShadowEnabled = True
+        ShadowColor = xAA0EA5E9
+        ShadowBlur = 12.000000000000000000
+        ShadowOffsetX = 0.000000000000000000
+        ShadowOffsetY = 0.000000000000000000
+        TextAlign = ltaCenter
+        VerticalAlign = lvaCenter
+        BackgroundColor = claNull
+        BorderColor = claNull
+        BorderWidth = 0.000000000000000000
+      end
+    end
+    object cardAlign: TDSkPanel
+      Left = 32
+      Top = 368
+      Width = 318
+      Height = 154
+      Caption = ''
+      CaptionPosition = cpTopLeft
+      ChildPadding = 0.000000000000000000
+      BackgroundHover = xFFFFFFFF
+      PanelStyle = psStyleNone
+      CornerRadius = 18.000000000000000000
+      BackgroundColor = xFFFFFFFF
+      BorderColor = xFFE2E8F0
+      BorderWidth = 1.000000000000000000
+      object lblAlignCaption: TDSkLabel
+        Left = 20
+        Top = 14
+        Width = 250
+        Height = 24
+        Caption = 'Alignment box'
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -13
+        Font.Name = 'Microsoft YaHei UI'
+        Font.Style = [fsBold]
+        AutoSize = False
+        ColorScheme = muiSchemeNone
+        FontColor = xFF64748B
+        TextAlign = ltaLeft
+        VerticalAlign = lvaCenter
+        BackgroundColor = claNull
+        BorderColor = claNull
+        BorderWidth = 0.000000000000000000
+      end
+      object pnlAlignBox: TDSkPanel
+        Left = 20
+        Top = 46
+        Width = 270
+        Height = 82
+        Caption = ''
+        CaptionPosition = cpTopLeft
+        ChildPadding = 0.000000000000000000
+        BackgroundHover = xFFEFF6FF
+        PanelStyle = psStyleNone
+        CornerRadius = 12.000000000000000000
+        BackgroundColor = xFFEFF6FF
+        BorderColor = xFFBFDBFE
+        BorderWidth = 1.000000000000000000
+        object lblAlignText: TDSkLabel
+          Left = 16
+          Top = 12
+          Width = 238
+          Height = 56
+          Caption = 'Right + Bottom'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -19
+          Font.Name = 'Microsoft YaHei UI'
+          Font.Style = [fsBold]
+          AutoSize = False
+          ColorScheme = muiSchemeNone
+          FontColor = xFF1976D2
+          StrokeEnabled = True
+          StrokeColor = xFFFFFFFF
+          StrokeWidth = 1.000000000000000000
+          TextAlign = ltaRight
+          VerticalAlign = lvaBottom
+          BackgroundColor = claNull
+          BorderColor = claNull
+          BorderWidth = 0.000000000000000000
+        end
+      end
+    end
+    object cardDisabled: TDSkPanel
+      Left = 374
+      Top = 368
+      Width = 318
+      Height = 154
+      Caption = ''
+      CaptionPosition = cpTopLeft
+      ChildPadding = 0.000000000000000000
+      BackgroundHover = xFFFFFFFF
+      PanelStyle = psStyleNone
+      CornerRadius = 18.000000000000000000
+      BackgroundColor = xFFFFFFFF
+      BorderColor = xFFE2E8F0
+      BorderWidth = 1.000000000000000000
+      object lblDisabledCaption: TDSkLabel
+        Left = 20
+        Top = 14
+        Width = 250
+        Height = 24
+        Caption = 'Disabled priority'
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -13
+        Font.Name = 'Microsoft YaHei UI'
+        Font.Style = [fsBold]
+        AutoSize = False
+        ColorScheme = muiSchemeNone
+        FontColor = xFF64748B
+        TextAlign = ltaLeft
+        VerticalAlign = lvaCenter
+        BackgroundColor = claNull
+        BorderColor = claNull
+        BorderWidth = 0.000000000000000000
+      end
+      object lblDisabled: TDSkLabel
+        Left = 20
+        Top = 48
+        Width = 270
+        Height = 56
+        Enabled = False
+        Caption = 'Disabled'
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -37
+        Font.Name = 'Microsoft YaHei UI'
+        Font.Style = [fsBold]
+        AutoSize = False
+        ColorScheme = muiSchemeNone
+        FontColor = xFF1976D2
+        TextEffect = lteGradient
+        GradientStartColor = xFF0EA5E9
+        GradientEndColor = xFF22C55E
+        StrokeEnabled = True
+        StrokeColor = xFF0F172A
+        StrokeWidth = 1.500000000000000000
+        ShadowEnabled = True
+        ShadowColor = x660EA5E9
+        ShadowBlur = 8.000000000000000000
+        TextAlign = ltaCenter
+        VerticalAlign = lvaCenter
+        BackgroundColor = claNull
+        BorderColor = claNull
+        BorderWidth = 0.000000000000000000
+      end
+      object lblDisabledDesc: TDSkLabel
+        Left = 24
+        Top = 110
+        Width = 262
+        Height = 24
+        Caption = 'Gradient and shadow are suppressed when disabled'
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -12
+        Font.Name = 'Microsoft YaHei UI'
+        Font.Style = []
+        AutoSize = False
+        ColorScheme = muiSchemeNone
+        FontColor = xFF94A3B8
+        TextAlign = ltaCenter
+        VerticalAlign = lvaCenter
+        BackgroundColor = claNull
+        BorderColor = claNull
+        BorderWidth = 0.000000000000000000
+      end
+    end
+  end
+end

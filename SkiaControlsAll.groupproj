@@ -1,0 +1,132 @@
+﻿<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+    <PropertyGroup>
+        <ProjectGuid>{1CE65498-60FD-4682-A79F-B1BFB6E9808E}</ProjectGuid>
+    </PropertyGroup>
+    <ItemGroup>
+        <Projects Include="SkiaVclControls.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="Demo\Button\ButtonDemo.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="Demo\Panel\PanelDemo.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="Demo\Radio\RadioDemo.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="Demo\Checkbox\CheckboxDemo.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="Demo\Switch\SwitchDemo.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="Demo\Tabs\TabsDemo.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="Demo\AdminDemo\AdminDemo.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="Demo\Label\LabelDemo.dproj">
+            <Dependencies/>
+        </Projects>
+    </ItemGroup>
+    <ProjectExtensions>
+        <Borland.Personality>Default.Personality.12</Borland.Personality>
+        <Borland.ProjectType/>
+        <BorlandProject>
+            <Default.Personality/>
+        </BorlandProject>
+    </ProjectExtensions>
+    <Target Name="SkiaVclControls">
+        <MSBuild Projects="SkiaVclControls.dproj"/>
+    </Target>
+    <Target Name="SkiaVclControls:Clean">
+        <MSBuild Projects="SkiaVclControls.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="SkiaVclControls:Make">
+        <MSBuild Projects="SkiaVclControls.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="ButtonDemo">
+        <MSBuild Projects="Demo\Button\ButtonDemo.dproj"/>
+    </Target>
+    <Target Name="ButtonDemo:Clean">
+        <MSBuild Projects="Demo\Button\ButtonDemo.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="ButtonDemo:Make">
+        <MSBuild Projects="Demo\Button\ButtonDemo.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="PanelDemo">
+        <MSBuild Projects="Demo\Panel\PanelDemo.dproj"/>
+    </Target>
+    <Target Name="PanelDemo:Clean">
+        <MSBuild Projects="Demo\Panel\PanelDemo.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="PanelDemo:Make">
+        <MSBuild Projects="Demo\Panel\PanelDemo.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="RadioDemo">
+        <MSBuild Projects="Demo\Radio\RadioDemo.dproj"/>
+    </Target>
+    <Target Name="RadioDemo:Clean">
+        <MSBuild Projects="Demo\Radio\RadioDemo.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="RadioDemo:Make">
+        <MSBuild Projects="Demo\Radio\RadioDemo.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="CheckboxDemo">
+        <MSBuild Projects="Demo\Checkbox\CheckboxDemo.dproj"/>
+    </Target>
+    <Target Name="CheckboxDemo:Clean">
+        <MSBuild Projects="Demo\Checkbox\CheckboxDemo.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="CheckboxDemo:Make">
+        <MSBuild Projects="Demo\Checkbox\CheckboxDemo.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="SwitchDemo">
+        <MSBuild Projects="Demo\Switch\SwitchDemo.dproj"/>
+    </Target>
+    <Target Name="SwitchDemo:Clean">
+        <MSBuild Projects="Demo\Switch\SwitchDemo.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="SwitchDemo:Make">
+        <MSBuild Projects="Demo\Switch\SwitchDemo.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="TabsDemo">
+        <MSBuild Projects="Demo\Tabs\TabsDemo.dproj"/>
+    </Target>
+    <Target Name="TabsDemo:Clean">
+        <MSBuild Projects="Demo\Tabs\TabsDemo.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="TabsDemo:Make">
+        <MSBuild Projects="Demo\Tabs\TabsDemo.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="AdminDemo">
+        <MSBuild Projects="Demo\AdminDemo\AdminDemo.dproj"/>
+    </Target>
+    <Target Name="AdminDemo:Clean">
+        <MSBuild Projects="Demo\AdminDemo\AdminDemo.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="AdminDemo:Make">
+        <MSBuild Projects="Demo\AdminDemo\AdminDemo.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="LabelDemo">
+        <MSBuild Projects="Demo\Label\LabelDemo.dproj"/>
+    </Target>
+    <Target Name="LabelDemo:Clean">
+        <MSBuild Projects="Demo\Label\LabelDemo.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="LabelDemo:Make">
+        <MSBuild Projects="Demo\Label\LabelDemo.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="Build">
+        <CallTarget Targets="SkiaVclControls;ButtonDemo;PanelDemo;RadioDemo;CheckboxDemo;SwitchDemo;TabsDemo;AdminDemo;LabelDemo"/>
+    </Target>
+    <Target Name="Clean">
+        <CallTarget Targets="SkiaVclControls:Clean;ButtonDemo:Clean;PanelDemo:Clean;RadioDemo:Clean;CheckboxDemo:Clean;SwitchDemo:Clean;TabsDemo:Clean;AdminDemo:Clean;LabelDemo:Clean"/>
+    </Target>
+    <Target Name="Make">
+        <CallTarget Targets="SkiaVclControls:Make;ButtonDemo:Make;PanelDemo:Make;RadioDemo:Make;CheckboxDemo:Make;SwitchDemo:Make;TabsDemo:Make;AdminDemo:Make;LabelDemo:Make"/>
+    </Target>
+    <Import Project="$(BDS)\Bin\CodeGear.Group.Targets" Condition="Exists('$(BDS)\Bin\CodeGear.Group.Targets')"/>
+</Project>
