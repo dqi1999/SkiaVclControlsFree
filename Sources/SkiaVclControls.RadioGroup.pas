@@ -4,7 +4,6 @@ interface
 
 uses
   System.Classes, System.SysUtils, System.Types, System.UITypes, System.Math,
-  System.Math.Vectors,
   Vcl.Controls, Vcl.Graphics, Vcl.Skia, System.Skia,
   Winapi.Messages, Winapi.Windows,
   SkiaVclControls.Types, SkiaVclControls.Base;
@@ -330,7 +329,7 @@ begin
   else
   begin
     LFont := GetCaptionFontCache;
-    Result := LFont.Size + DpiScaleValue(FCaptionMargin);
+    Result := LFont.Size + FCaptionMargin;
   end;
 end;
 
@@ -338,43 +337,31 @@ function TDSkRadioGroup.GetItemRect(Index: Integer): TRectF;
 var
   LTitleHeight: Single;
   LItemHeight: Single;
-  LScaledRadioSize: Single;
-  LScaledSpacingV: Single;
-  LScaledSpacingH: Single;
-  LScaledItemWidth: Single;
 begin
   LTitleHeight := GetTitleHeight;
-  // 根据 RadioSize 计算 Item 高度（需要DPI缩放）
-  LScaledRadioSize := DpiScaleValue(FRadioSize);
-  LScaledSpacingV := DpiScaleValue(ITEM_SPACING_V);
-  LScaledSpacingH := DpiScaleValue(ITEM_SPACING_H);
-  LScaledItemWidth := DpiScaleValue(ITEM_WIDTH);
-  LItemHeight := LScaledRadioSize + DpiScaleValue(8); // RadioSize + 间距
+  // 根据 RadioSize 计算 Item 高度
+  LItemHeight := FRadioSize + 8; // RadioSize + 间距
   
   if FOrientation = rgoVertical then
-    Result := RectF(0, LTitleHeight + Index * (LItemHeight + LScaledSpacingV), ClientWidth,
-      LTitleHeight + Index * (LItemHeight + LScaledSpacingV) + LItemHeight)
+    Result := RectF(0, LTitleHeight + Index * (LItemHeight + ITEM_SPACING_V), ClientWidth,
+      LTitleHeight + Index * (LItemHeight + ITEM_SPACING_V) + LItemHeight)
   else
-    Result := RectF(Index * (LScaledItemWidth + LScaledSpacingH), 0,
-      Index * (LScaledItemWidth + LScaledSpacingH) + LScaledItemWidth, ClientHeight);
+    Result := RectF(Index * (ITEM_WIDTH + ITEM_SPACING_H), 0,
+      Index * (ITEM_WIDTH + ITEM_SPACING_H) + ITEM_WIDTH, ClientHeight);
 end;
 
 function TDSkRadioGroup.GetRadioCircleCenter(Index: Integer): TPointF;
 var
   LRect: TRectF;
-  LScaledRadioSize: Single;
-  LScaledGap: Single;
 begin
   LRect := GetItemRect(Index);
-  LScaledRadioSize := DpiScaleValue(FRadioSize);
-  LScaledGap := DpiScaleValue(4);
   case FLabelPlacement of
-    rlpRight: Result := PointF(LRect.Left + LScaledRadioSize / 2 + LScaledGap, LRect.Top + LRect.Height / 2);
-    rlpLeft: Result := PointF(LRect.Right - LScaledRadioSize / 2 - LScaledGap, LRect.Top + LRect.Height / 2);
-    rlpTop: Result := PointF(LRect.Left + LRect.Width / 2, LRect.Bottom - LScaledRadioSize / 2 - LScaledGap);
-    rlpBottom: Result := PointF(LRect.Left + LRect.Width / 2, LRect.Top + LScaledRadioSize / 2 + LScaledGap);
+    rlpRight: Result := PointF(LRect.Left + FRadioSize / 2 + 4, LRect.Top + LRect.Height / 2);
+    rlpLeft: Result := PointF(LRect.Right - FRadioSize / 2 - 4, LRect.Top + LRect.Height / 2);
+    rlpTop: Result := PointF(LRect.Left + LRect.Width / 2, LRect.Bottom - FRadioSize / 2 - 4);
+    rlpBottom: Result := PointF(LRect.Left + LRect.Width / 2, LRect.Top + FRadioSize / 2 + 4);
   else
-    Result := PointF(LRect.Left + LScaledRadioSize / 2 + LScaledGap, LRect.Top + LRect.Height / 2);
+    Result := PointF(LRect.Left + FRadioSize / 2 + 4, LRect.Top + LRect.Height / 2);
   end;
 end;
 
@@ -395,24 +382,11 @@ end;
 procedure TDSkRadioGroup.Draw(const ACanvas: ISkCanvas; const ADest: TRectF; const AOpacity: Single);
 var
   i: Integer;
-  LScale: Single;
-  LPhysicalDest: TRectF;
 begin
   ACanvas.Clear(TAlphaColors.Null);
-  // 撤销 canvas 的 DPI 缩放变换，使后续绘制使用物理像素坐标
-  LScale := ScaleFactor;
-  ACanvas.Save;
-  try
-    if LScale <> 1.0 then
-      ACanvas.Concat(TMatrix.CreateScaling(1 / LScale, 1 / LScale));
-    LPhysicalDest := RectF(ADest.Left * LScale, ADest.Top * LScale,
-      ADest.Right * LScale, ADest.Bottom * LScale);
-    DrawTitle(ACanvas, LPhysicalDest);
-    for i := 0 to FItems.Count - 1 do
-      DrawItem(ACanvas, LPhysicalDest, i);
-  finally
-    ACanvas.Restore;
-  end;
+  DrawTitle(ACanvas, ADest);
+  for i := 0 to FItems.Count - 1 do
+    DrawItem(ACanvas, ADest, i);
 end;
 
 procedure TDSkRadioGroup.DrawTitle(const ACanvas: ISkCanvas; const ADest: TRectF);
@@ -444,18 +418,14 @@ var
   LItemRect: TRectF;
   LChecked: Boolean;
   LText: string;
-  LScaledRadioSize: Single;
-  LScaledLabelGap: Single;
 begin
   if (Index < 0) or (Index >= FItems.Count) then Exit;
 
   LChecked := Index = FItemIndex;
   LColor := GetRadioColor;
   LCenter := GetRadioCircleCenter(Index);
-  LScaledRadioSize := DpiScaleValue(FRadioSize);
-  LRadius := LScaledRadioSize / 2;
+  LRadius := FRadioSize / 2;
   LItemRect := GetItemRect(Index);
-  LScaledLabelGap := DpiScaleValue(LABEL_GAP);
 
   // 确定颜色
   if (not Enabled) or IsParentDisabled then
@@ -487,20 +457,20 @@ begin
 
     // 外圈（选中时颜色变淡）
     LPaint.Style := TSkPaintStyle.Stroke;
-    LPaint.StrokeWidth := DpiScaleValue(1.5);
+    LPaint.StrokeWidth := 1.5;
     if (not Enabled) or IsParentDisabled then
       LPaint.Color := $FFBDBDBD
     else
       LPaint.Color := (LOuterColor and $00FFFFFF) or $80000000; // 50% 透明度
-    ACanvas.DrawCircle(LCenter, LRadius - DpiScaleValue(1), LPaint);
+    ACanvas.DrawCircle(LCenter, LRadius - 1, LPaint);
   end
   else
   begin
     // 未选中状态：空心圆
     LPaint.Style := TSkPaintStyle.Stroke;
-    LPaint.StrokeWidth := DpiScaleValue(1.5);
+    LPaint.StrokeWidth := 1.5;
     LPaint.Color := LOuterColor;
-    ACanvas.DrawCircle(LCenter, LRadius - DpiScaleValue(1), LPaint);
+    ACanvas.DrawCircle(LCenter, LRadius - 1, LPaint);
   end;
 
   // 绘制标签文字
@@ -519,25 +489,25 @@ begin
 
     case FLabelPlacement of
       rlpRight: begin
-        LX := LCenter.X + LRadius + LScaledLabelGap;
-        LY := LItemRect.Top + (LItemRect.Height + LFontSize) / 2 - DpiScaleValue(2);
+        LX := LCenter.X + LRadius + LABEL_GAP;
+        LY := LItemRect.Top + (LItemRect.Height + LFontSize) / 2 - 2;
       end;
       rlpLeft: begin
-        LX := LCenter.X - LRadius - LScaledLabelGap - LTextW;
-        LY := LItemRect.Top + (LItemRect.Height + LFontSize) / 2 - DpiScaleValue(2);
+        LX := LCenter.X - LRadius - LABEL_GAP - LTextW;
+        LY := LItemRect.Top + (LItemRect.Height + LFontSize) / 2 - 2;
       end;
       rlpTop: begin
         LX := LItemRect.Left + (LItemRect.Width - LTextW) / 2;
-        LY := LCenter.Y - LRadius - LScaledLabelGap;
+        LY := LCenter.Y - LRadius - LABEL_GAP;
       end;
       rlpBottom: begin
         LX := LItemRect.Left + (LItemRect.Width - LTextW) / 2;
-        LY := LCenter.Y + LRadius + LScaledLabelGap + LFontSize;
+        LY := LCenter.Y + LRadius + LABEL_GAP + LFontSize;
       end;
     else
       begin
-        LX := LCenter.X + LRadius + LScaledLabelGap;
-        LY := LItemRect.Top + (LItemRect.Height + LFontSize) / 2 - DpiScaleValue(2);
+        LX := LCenter.X + LRadius + LABEL_GAP;
+        LY := LItemRect.Top + (LItemRect.Height + LFontSize) / 2 - 2;
       end;
     end;
 

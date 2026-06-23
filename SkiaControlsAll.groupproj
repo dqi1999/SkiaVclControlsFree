@@ -12,6 +12,9 @@
         <Projects Include="Demo\Panel\PanelDemo.dproj">
             <Dependencies/>
         </Projects>
+        <Projects Include="Demo\ButtonGroup\ButtonGroupDemo.dproj">
+            <Dependencies/>
+        </Projects>
         <Projects Include="Demo\Radio\RadioDemo.dproj">
             <Dependencies/>
         </Projects>
@@ -19,6 +22,18 @@
             <Dependencies/>
         </Projects>
         <Projects Include="Demo\Switch\SwitchDemo.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="Demo\Select\SelectDemo.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="Demo\Edit\EditDemo.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="Demo\Progress\ProgressBarDemo.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="Demo\Stepper\StepperDemo.dproj">
             <Dependencies/>
         </Projects>
         <Projects Include="Demo\Tabs\TabsDemo.dproj">
@@ -65,6 +80,15 @@
     <Target Name="PanelDemo:Make">
         <MSBuild Projects="Demo\Panel\PanelDemo.dproj" Targets="Make"/>
     </Target>
+    <Target Name="ButtonGroupDemo">
+        <MSBuild Projects="Demo\ButtonGroup\ButtonGroupDemo.dproj"/>
+    </Target>
+    <Target Name="ButtonGroupDemo:Clean">
+        <MSBuild Projects="Demo\ButtonGroup\ButtonGroupDemo.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="ButtonGroupDemo:Make">
+        <MSBuild Projects="Demo\ButtonGroup\ButtonGroupDemo.dproj" Targets="Make"/>
+    </Target>
     <Target Name="RadioDemo">
         <MSBuild Projects="Demo\Radio\RadioDemo.dproj"/>
     </Target>
@@ -91,6 +115,42 @@
     </Target>
     <Target Name="SwitchDemo:Make">
         <MSBuild Projects="Demo\Switch\SwitchDemo.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="SelectDemo">
+        <MSBuild Projects="Demo\Select\SelectDemo.dproj"/>
+    </Target>
+    <Target Name="SelectDemo:Clean">
+        <MSBuild Projects="Demo\Select\SelectDemo.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="SelectDemo:Make">
+        <MSBuild Projects="Demo\Select\SelectDemo.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="EditDemo">
+        <MSBuild Projects="Demo\Edit\EditDemo.dproj"/>
+    </Target>
+    <Target Name="EditDemo:Clean">
+        <MSBuild Projects="Demo\Edit\EditDemo.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="EditDemo:Make">
+        <MSBuild Projects="Demo\Edit\EditDemo.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="ProgressBarDemo">
+        <MSBuild Projects="Demo\Progress\ProgressBarDemo.dproj"/>
+    </Target>
+    <Target Name="ProgressBarDemo:Clean">
+        <MSBuild Projects="Demo\Progress\ProgressBarDemo.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="ProgressBarDemo:Make">
+        <MSBuild Projects="Demo\Progress\ProgressBarDemo.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="StepperDemo">
+        <MSBuild Projects="Demo\Stepper\StepperDemo.dproj"/>
+    </Target>
+    <Target Name="StepperDemo:Clean">
+        <MSBuild Projects="Demo\Stepper\StepperDemo.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="StepperDemo:Make">
+        <MSBuild Projects="Demo\Stepper\StepperDemo.dproj" Targets="Make"/>
     </Target>
     <Target Name="TabsDemo">
         <MSBuild Projects="Demo\Tabs\TabsDemo.dproj"/>
@@ -120,13 +180,13 @@
         <MSBuild Projects="Demo\Label\LabelDemo.dproj" Targets="Make"/>
     </Target>
     <Target Name="Build">
-        <CallTarget Targets="SkiaVclControls;ButtonDemo;PanelDemo;RadioDemo;CheckboxDemo;SwitchDemo;TabsDemo;AdminDemo;LabelDemo"/>
+        <CallTarget Targets="SkiaVclControls;ButtonDemo;PanelDemo;ButtonGroupDemo;RadioDemo;CheckboxDemo;SwitchDemo;SelectDemo;EditDemo;ProgressBarDemo;StepperDemo;TabsDemo;AdminDemo;LabelDemo"/>
     </Target>
     <Target Name="Clean">
-        <CallTarget Targets="SkiaVclControls:Clean;ButtonDemo:Clean;PanelDemo:Clean;RadioDemo:Clean;CheckboxDemo:Clean;SwitchDemo:Clean;TabsDemo:Clean;AdminDemo:Clean;LabelDemo:Clean"/>
+        <CallTarget Targets="SkiaVclControls:Clean;ButtonDemo:Clean;PanelDemo:Clean;ButtonGroupDemo:Clean;RadioDemo:Clean;CheckboxDemo:Clean;SwitchDemo:Clean;SelectDemo:Clean;EditDemo:Clean;ProgressBarDemo:Clean;StepperDemo:Clean;TabsDemo:Clean;AdminDemo:Clean;LabelDemo:Clean"/>
     </Target>
     <Target Name="Make">
-        <CallTarget Targets="SkiaVclControls:Make;ButtonDemo:Make;PanelDemo:Make;RadioDemo:Make;CheckboxDemo:Make;SwitchDemo:Make;TabsDemo:Make;AdminDemo:Make;LabelDemo:Make"/>
+        <CallTarget Targets="SkiaVclControls:Make;ButtonDemo:Make;PanelDemo:Make;ButtonGroupDemo:Make;RadioDemo:Make;CheckboxDemo:Make;SwitchDemo:Make;SelectDemo:Make;EditDemo:Make;ProgressBarDemo:Make;StepperDemo:Make;TabsDemo:Make;AdminDemo:Make;LabelDemo:Make"/>
     </Target>
     <Import Project="$(BDS)\Bin\CodeGear.Group.Targets" Condition="Exists('$(BDS)\Bin\CodeGear.Group.Targets')"/>
 </Project>

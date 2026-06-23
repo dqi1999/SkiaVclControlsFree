@@ -39,6 +39,9 @@ Release/
 Sources/Win32/
 Sources/Win64/
 
+# 备份文件
+*.bak
+
 # 系统文件
 Thumbs.db
 desktop.ini
@@ -54,3 +57,13 @@ PROJECT.md
 
 # 文档目录
 docs/
+
+# Daofy 工具生成文件
+.delphi-kb/
+*.otares
+*.zip
+screenshot*.py
+list_windows.py
+
+# Skill 系统文件
+SKILL.md

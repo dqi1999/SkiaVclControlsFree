@@ -4,7 +4,6 @@ interface
 
 uses
   System.Classes, System.SysUtils, System.Types, System.UITypes, System.Math,
-  System.Math.Vectors,
   Vcl.Controls, Vcl.Graphics, Vcl.Forms, Vcl.Skia, System.Skia,
   Winapi.Messages, Winapi.Windows,
   SkiaVclControls.Types, SkiaVclControls.Base;
@@ -886,41 +885,26 @@ begin
 end;
 
 procedure TDSkSlider.Draw(const ACanvas: ISkCanvas; const ADest: TRectF; const AOpacity: Single);
-var
-  LScale: Single;
-  LPhysicalDest: TRectF;
 begin
   // 先清除为透明
   ACanvas.Clear($00FFFFFF);
   
-  // 撤销 canvas 的 DPI 缩放变换，使后续绘制使用物理像素坐标
-  LScale := ScaleFactor;
-  ACanvas.Save;
-  try
-    if LScale <> 1.0 then
-      ACanvas.Concat(TMatrix.CreateScaling(1 / LScale, 1 / LScale));
-    LPhysicalDest := RectF(ADest.Left * LScale, ADest.Top * LScale,
-      ADest.Right * LScale, ADest.Bottom * LScale);
+  // 绘制轨道
+  if FTrackVisible <> stFalse then
+    DrawTrack(ACanvas, ADest);
 
-    // 绘制轨道
-    if FTrackVisible <> stFalse then
-      DrawTrack(ACanvas, LPhysicalDest);
+  // 绘制标记
+  if FShowMarks or (FMarkCount > 0) then
+    DrawMarks(ACanvas, ADest);
 
-    // 绘制标记
-    if FShowMarks or (FMarkCount > 0) then
-      DrawMarks(ACanvas, LPhysicalDest);
-
-    // 绘制滑块
-    if FRange then
-    begin
-      DrawThumb(ACanvas, LPhysicalDest, FValueLow, 0);
-      DrawThumb(ACanvas, LPhysicalDest, FValueHigh, 1);
-    end
-    else
-      DrawThumb(ACanvas, LPhysicalDest, FValue, 0);
-  finally
-    ACanvas.Restore;
-  end;
+  // 绘制滑块
+  if FRange then
+  begin
+    DrawThumb(ACanvas, ADest, FValueLow, 0);
+    DrawThumb(ACanvas, ADest, FValueHigh, 1);
+  end
+  else
+    DrawThumb(ACanvas, ADest, FValue, 0);
 end;
 
 procedure TDSkSlider.DrawTrack(const ACanvas: ISkCanvas; const ADest: TRectF);

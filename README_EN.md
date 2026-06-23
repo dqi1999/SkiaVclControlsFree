@@ -14,28 +14,53 @@ Material Design VCL Controls based on Delphi built-in Skia (Lite Edition)
 - **Material Design 3** style
 - **Skia Rendering** - High-quality graphics with Delphi built-in Skia support
 - **DPI-Aware** - Perfect support for high-DPI displays
-- **Smooth Animations** - Built-in hover and click animations (Ripple/Glow/ScaleUp)
+- **Smooth Animations** - Built-in hover and click animations
 - **MUI Themes** - Built-in Material-UI color schemes
 - **Chinese Support** - Auto-detect and use system Chinese fonts
 - **Transparent Rendering** - Alpha channel transparency, parent-child compositing
 - **Disabled State** - Complete Enabled/Disabled visual state support
-- **Design-time Preview** - Full design-time visual editing support
 
 ---
 
 ## Controls
 
+### Basic Controls
+
 | Control | Description |
 |---------|-------------|
-| `TDSkLabel` | Material Design label with gradient, outline, and shadow effects |
+| `TDSkLabel` | Skia-rendered transparent label with gradient, stroke, shadow and auto-size |
 | `TDSkButton` | Material Design button with MUI colors, Ripple animation, multiple styles and icons |
+| `TDSkButtonGroup` | Button group, supports horizontal/vertical layout and exclusive selection |
 | `TDSkPanel` | Material Design panel with various container styles and hover effects |
-| `TDSkRadio` | Radio button, MUI style, transparent background support |
+
+### Selection Controls
+
+| Control | Description |
+|---------|-------------|
+| `TDSkRadio` | Radio button, MUI style, transparent background |
 | `TDSkRadioGroup` | Radio button group, self-drawing mode, with caption support |
 | `TDSkCheckbox` | Checkbox with tri-state support (unchecked/checked/indeterminate) |
+| `TDSkCheckboxGroup` | Checkbox group, supports multi-select |
 | `TDSkSwitch` | Switch control, track + thumb sliding switch |
+| `TDSkSwitchGroup` | Switch group |
+| `TDSkEdit` | Edit control with label, placeholder, clear button, error state |
+| `TDSkSelect` | Select dropdown with search, clear, multiple sizes |
+
+### Feedback Controls
+
+| Control | Description |
+|---------|-------------|
 | `TDSkSlider` | Slider, supports continuous/discrete/range/vertical sliders |
+| `TDSkProgressBar` | Linear progress bar, supports determinate/indeterminate/buffer modes |
+| `TDSkCircularProgress` | Circular progress indicator |
+| `TDSkSnackbar` | Snackbar with auto-hide and action button |
+
+### Navigation Controls
+
+| Control | Description |
+|---------|-------------|
 | `TDSkTabs` | Tabs, supports standard/bottom navigation styles, horizontal/vertical |
+| `TDSkStepper` | Stepper with step status management and custom content |
 
 ---
 
@@ -49,21 +74,13 @@ Material Design VCL Controls based on Delphi built-in Skia (Lite Edition)
 
 ## Installation
 
-### Method 1: Install via Delphi IDE
+### Install via Delphi IDE
 
 1. Clone or download this repository
 2. Open `SkiaVclControls.dpk` (design-time package)
 3. Right-click `SkiaVclControls.bpl` in Project Manager
 4. Select **Compile**, then **Install**
 5. Components will appear in the **SkiaVclControlsfree** tab
-
-### Method 2: Use Build Script
-
-```batch
-build.bat
-```
-
-Then manually install the generated `SkiaVclControls.bpl`
 
 ---
 
@@ -86,23 +103,6 @@ begin
 end;
 ```
 
-### TDSkPanel Example
-
-```delphi
-uses
-  SkiaVclControls.Panel, SkiaVclControls.Types;
-
-procedure TForm1.FormCreate(Sender: TObject);
-begin
-  Panel1 := TDSkPanel.Create(Self);
-  Panel1.Parent := Self;
-  Panel1.Caption := 'Title';
-  Panel1.PanelStyle := psOutlined;
-  Panel1.CornerRadius := 12;
-  Panel1.HoverEnabled := True;
-end;
-```
-
 ### TDSkRadioGroup Example
 
 ```delphi
@@ -113,13 +113,12 @@ procedure TForm1.FormCreate(Sender: TObject);
 begin
   RadioGroup1 := TDSkRadioGroup.Create(Self);
   RadioGroup1.Parent := Self;
-  RadioGroup1.Caption := 'Select an option';
+  RadioGroup1.Caption := 'Select Option';
   RadioGroup1.Items.Add('Option 1');
   RadioGroup1.Items.Add('Option 2');
   RadioGroup1.Items.Add('Option 3');
   RadioGroup1.ItemIndex := 0;
-  RadioGroup1.Orientation := rgoVertical;
-  RadioGroup1.ColorScheme := muiPrimary;
+  RadioGroup1.MUIColorScheme := muiPrimary;
 end;
 ```
 
@@ -134,72 +133,29 @@ SkiaVclControlsfree/
 │   ├── SkiaVclControls.Base.pas         # Base class
 │   ├── SkiaVclControls.LabelControl.pas # Label
 │   ├── SkiaVclControls.Button.pas       # Button
+│   ├── SkiaVclControls.ButtonGroup.pas  # Button group
 │   ├── SkiaVclControls.Panel.pas        # Panel
 │   ├── SkiaVclControls.Radio.pas        # Radio button
 │   ├── SkiaVclControls.RadioGroup.pas   # Radio button group
 │   ├── SkiaVclControls.Checkbox.pas     # Checkbox
+│   ├── SkiaVclControls.CheckboxGroup.pas# Checkbox group
 │   ├── SkiaVclControls.Switch.pas       # Switch
+│   ├── SkiaVclControls.SwitchGroup.pas  # Switch group
 │   ├── SkiaVclControls.Slider.pas       # Slider
+│   ├── SkiaVclControls.Edit.pas         # Edit
+│   ├── SkiaVclControls.Select.pas       # Select
+│   ├── SkiaVclControls.ProgressBar.pas  # Progress bar
+│   ├── SkiaVclControls.CircularProgress.pas # Circular progress
+│   ├── SkiaVclControls.Snackbar.pas     # Snackbar
+│   ├── SkiaVclControls.Stepper.pas      # Stepper
 │   ├── SkiaVclControls.Tabs.pas         # Tabs
 │   ├── SkiaVclControls.MUIHelper.pas    # MUI color helper
 │   └── SkiaVclControls.Register.pas     # Component registration
-├── Demo/                            # Demo applications (Frame architecture)
-│   ├── Shared/                      # Shared units
-│   │   └── Demo.Styles.pas          # Shared style constants
-│   ├── Frames/                      # Reusable demo Frames
-│   │   ├── Demo.Frame.LabelControl  # Label demo Frame
-│   │   ├── Demo.Frame.Button        # Button demo Frame
-│   │   ├── Demo.Frame.Panel         # Panel demo Frame
-│   │   ├── Demo.Frame.Radio         # Radio demo Frame
-│   │   ├── Demo.Frame.Checkbox      # Checkbox demo Frame
-│   │   ├── Demo.Frame.Switch        # Switch demo Frame
-│   │   ├── Demo.Frame.Slider        # Slider demo Frame
-│   │   └── Demo.Frame.Tabs          # Tabs demo Frame
-│   ├── Button/                      # Button demo
-│   ├── Panel/                       # Panel demo
-│   ├── Radio/                       # Radio button demo
-│   ├── Slider/                      # Slider demo
-│   ├── Checkbox/                    # Checkbox demo
-│   ├── Switch/                      # Switch demo
-│   ├── Tabs/                        # Tabs demo
-│   └── AdminDemo/                   # Comprehensive demo (Admin style)
+├── Demo/                            # Demo applications
+│   └── AdminDemo/                   # Admin Demo
+├── screenshots/                     # Screenshots
 ├── SkiaVclControls.dpk              # Design-time package
 └── build.bat                        # Build script
-```
-
----
-
-## Demo Architecture
-
-### Frame Architecture Design
-
-Demo uses **Frame architecture** for code reuse and unified maintenance:
-
-1. **Shared Layer** (`Demo/Shared/`)
-   - `Demo.Styles.pas`: Material Design 3 color constants and style definitions
-
-2. **Frame Layer** (`Demo/Frames/`)
-   - `Demo.Frame.*`: Component demo Frames, can be used independently or embedded in other containers
-
-3. **Single Component Demo** (`Demo/Button/`, `Demo/Panel/`, etc.)
-   - Individual component demo programs
-
-4. **Comprehensive Demo** (`Demo/AdminDemo/`)
-   - Admin-style multi-page UI
-   - Left side TDSkTabs vertical navigation
-   - Right side dynamic Frame switching
-   - Reuses all component Frames
-
-### Run Demo
-
-```bash
-# Compile and run single component demo
-cd Demo/Button
-dcc32 ButtonDemo.dpr
-
-# Compile and run comprehensive demo
-cd Demo/AdminDemo
-dcc32 AdminDemo.dpr
 ```
 
 ---
@@ -209,35 +165,47 @@ dcc32 AdminDemo.dpr
 ### Admin Demo
 ![Admin Demo](screenshots/Demo-Admin.gif)
 
-### TDSkLabel Demo
-![Label Demo](screenshots/Demo-Label.png)
+### TDSkLabel
+![Label](screenshots/tab_00_Label.png)
 
-### TDSkButton Demo
-![Button Demo](screenshots/Demo-Button.png)
+### TDSkButton
+![Button](screenshots/tab_01_Button.png)
 
-### TDSkPanel Demo
-![Panel Demo](screenshots/Demo-Panel.png)
+### TDSkPanel
+![Panel](screenshots/tab_02_Panel.png)
 
-### TDSkRadio Demo
-![Radio Demo](screenshots/Demo-Radio.png)
+### TDSkRadio
+![Radio](screenshots/tab_03_Radio.png)
 
-### TDSkCheckbox Demo
-![Checkbox Demo](screenshots/Demo-Checkbox.png)
+### TDSkCheckbox
+![Checkbox](screenshots/tab_04_Checkbox.png)
 
-### TDSkSwitch Demo
-![Switch Demo](screenshots/Demo-Switch.png)
+### TDSkSwitch
+![Switch](screenshots/tab_05_Switch.png)
 
-### TDSkSlider Demo
-![Slider Demo](screenshots/Demo-Slider.png)
+### TDSkSlider
+![Slider](screenshots/tab_06_Slider.png)
 
-### TDSkTabs Demo
-![Tabs Demo](screenshots/Demo-Tabs.png)
+### TDSkProgressBar / TDSkCircularProgress
+![Progress](screenshots/tab_07_progress.png)
 
----
+### TDSkSelect
+![Select](screenshots/tab_08_select.png)
 
-## Contributing
+### TDSkEdit
+![Edit](screenshots/tab_09_edit.png)
 
-Issues and Pull Requests are welcome!
+### TDSkSnackbar
+![Snackbar](screenshots/tab_10_snackbar.png)
+
+### TDSkButtonGroup
+![ButtonGroup](screenshots/tab_11_button_group.png)
+
+### TDSkTabs
+![Tabs](screenshots/tab_12_Tabs.png)
+
+### TDSkStepper
+![Stepper](screenshots/tab_13_stepper.png)
 
 ---
 
@@ -251,4 +219,3 @@ This project is licensed under the [MIT](LICENSE) License
 
 - [Skia](https://skia.org/) - Powerful 2D graphics library
 - [Material Design](https://m3.material.io/) - Google Material Design 3
-- [Material-UI](https://mui.com/) - React UI component library (color reference)

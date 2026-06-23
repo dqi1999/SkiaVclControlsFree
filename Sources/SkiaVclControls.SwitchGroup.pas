@@ -4,7 +4,7 @@ interface
 
 uses
   System.Classes, System.SysUtils, System.Types, System.UITypes, System.Math,
-  System.Math.Vectors, System.Generics.Collections,
+  System.Generics.Collections,
   Vcl.Controls, Vcl.Graphics, Vcl.Skia, System.Skia,
   Winapi.Messages, Winapi.Windows,
   SkiaVclControls.Types, SkiaVclControls.Base;
@@ -376,7 +376,7 @@ begin
   else
   begin
     LFont := GetCaptionFontCache;
-    Result := LFont.Size + DpiScaleValue(FCaptionMargin);
+    Result := LFont.Size + FCaptionMargin;
   end;
 end;
 
@@ -384,42 +384,30 @@ function TDSkSwitchGroup.GetItemRect(Index: Integer): TRectF;
 var
   LTitleHeight: Single;
   LItemHeight: Single;
-  LScaledTrackHeight: Single;
-  LScaledSpacingV: Single;
-  LScaledSpacingH: Single;
-  LScaledItemWidth: Single;
 begin
   LTitleHeight := GetTitleHeight;
-  LScaledTrackHeight := DpiScaleValue(GetTrackHeight);
-  LScaledSpacingV := DpiScaleValue(ITEM_SPACING_V);
-  LScaledSpacingH := DpiScaleValue(ITEM_SPACING_H);
-  LScaledItemWidth := DpiScaleValue(140);
-  LItemHeight := LScaledTrackHeight + DpiScaleValue(8);
+  LItemHeight := GetTrackHeight + 8;
 
   if FOrientation = rgoVertical then
-    Result := RectF(0, LTitleHeight + Index * (LItemHeight + LScaledSpacingV), ClientWidth,
-      LTitleHeight + Index * (LItemHeight + LScaledSpacingV) + LItemHeight)
+    Result := RectF(0, LTitleHeight + Index * (LItemHeight + ITEM_SPACING_V), ClientWidth,
+      LTitleHeight + Index * (LItemHeight + ITEM_SPACING_V) + LItemHeight)
   else
-    Result := RectF(Index * (LScaledItemWidth + LScaledSpacingH), 0,
-      Index * (LScaledItemWidth + LScaledSpacingH) + LScaledItemWidth, ClientHeight);
+    Result := RectF(Index * (140 + ITEM_SPACING_H), 0,
+      Index * (140 + ITEM_SPACING_H) + 140, ClientHeight);
 end;
 
 function TDSkSwitchGroup.GetSwitchCenter(Index: Integer): TPointF;
 var
   LRect: TRectF;
-  LScaledTrackWidth: Single;
-  LScaledTrackHeight: Single;
 begin
   LRect := GetItemRect(Index);
-  LScaledTrackWidth := DpiScaleValue(GetTrackWidth);
-  LScaledTrackHeight := DpiScaleValue(GetTrackHeight);
   case FLabelPlacement of
-    rlpRight: Result := PointF(LRect.Left + LScaledTrackWidth / 2, LRect.Top + LRect.Height / 2);
-    rlpLeft: Result := PointF(LRect.Right - LScaledTrackWidth / 2, LRect.Top + LRect.Height / 2);
-    rlpTop: Result := PointF(LRect.Left + LRect.Width / 2, LRect.Bottom - LScaledTrackHeight / 2);
-    rlpBottom: Result := PointF(LRect.Left + LRect.Width / 2, LRect.Top + LScaledTrackHeight / 2);
+    rlpRight: Result := PointF(LRect.Left + GetTrackWidth / 2, LRect.Top + LRect.Height / 2);
+    rlpLeft: Result := PointF(LRect.Right - GetTrackWidth / 2, LRect.Top + LRect.Height / 2);
+    rlpTop: Result := PointF(LRect.Left + LRect.Width / 2, LRect.Bottom - GetTrackHeight / 2);
+    rlpBottom: Result := PointF(LRect.Left + LRect.Width / 2, LRect.Top + GetTrackHeight / 2);
   else
-    Result := PointF(LRect.Left + LScaledTrackWidth / 2, LRect.Top + LRect.Height / 2);
+    Result := PointF(LRect.Left + GetTrackWidth / 2, LRect.Top + LRect.Height / 2);
   end;
 end;
 
@@ -510,24 +498,11 @@ end;
 procedure TDSkSwitchGroup.Draw(const ACanvas: ISkCanvas; const ADest: TRectF; const AOpacity: Single);
 var
   i: Integer;
-  LScale: Single;
-  LPhysicalDest: TRectF;
 begin
   ACanvas.Clear(TAlphaColors.Null);
-  // 撤销 canvas 的 DPI 缩放变换，使后续绘制使用物理像素坐标
-  LScale := ScaleFactor;
-  ACanvas.Save;
-  try
-    if LScale <> 1.0 then
-      ACanvas.Concat(TMatrix.CreateScaling(1 / LScale, 1 / LScale));
-    LPhysicalDest := RectF(ADest.Left * LScale, ADest.Top * LScale,
-      ADest.Right * LScale, ADest.Bottom * LScale);
-    DrawTitle(ACanvas, LPhysicalDest);
-    for i := 0 to FItems.Count - 1 do
-      DrawItem(ACanvas, LPhysicalDest, i);
-  finally
-    ACanvas.Restore;
-  end;
+  DrawTitle(ACanvas, ADest);
+  for i := 0 to FItems.Count - 1 do
+    DrawItem(ACanvas, ADest, i);
 end;
 
 procedure TDSkSwitchGroup.DrawTitle(const ACanvas: ISkCanvas; const ADest: TRectF);
@@ -558,18 +533,12 @@ var
   LItemRect: TRectF;
   LChecked: Boolean;
   LText: string;
-  LScaledTrackWidth: Single;
-  LScaledTrackHeight: Single;
-  LScaledLabelGap: Single;
 begin
   if (Index < 0) or (Index >= FItems.Count) then Exit;
 
   LChecked := IsItemChecked(Index);
   LCenter := GetSwitchCenter(Index);
   LItemRect := GetItemRect(Index);
-  LScaledTrackWidth := DpiScaleValue(GetTrackWidth);
-  LScaledTrackHeight := DpiScaleValue(GetTrackHeight);
-  LScaledLabelGap := DpiScaleValue(LABEL_GAP);
 
   // 根据选中状态确定颜色
   if (not Enabled) or IsParentDisabled then
@@ -602,25 +571,25 @@ begin
 
     case FLabelPlacement of
       rlpRight: begin
-        LX := LCenter.X + LScaledTrackWidth / 2 + LScaledLabelGap;
-        LY := LItemRect.Top + (LItemRect.Height + LFontSize) / 2 - DpiScaleValue(2);
+        LX := LCenter.X + GetTrackWidth / 2 + LABEL_GAP;
+        LY := LItemRect.Top + (LItemRect.Height + LFontSize) / 2 - 2;
       end;
       rlpLeft: begin
-        LX := LCenter.X - LScaledTrackWidth / 2 - LScaledLabelGap - LTextW;
-        LY := LItemRect.Top + (LItemRect.Height + LFontSize) / 2 - DpiScaleValue(2);
+        LX := LCenter.X - GetTrackWidth / 2 - LABEL_GAP - LTextW;
+        LY := LItemRect.Top + (LItemRect.Height + LFontSize) / 2 - 2;
       end;
       rlpTop: begin
         LX := LItemRect.Left + (LItemRect.Width - LTextW) / 2;
-        LY := LCenter.Y - LScaledTrackHeight / 2 - LScaledLabelGap;
+        LY := LCenter.Y - GetTrackHeight / 2 - LABEL_GAP;
       end;
       rlpBottom: begin
         LX := LItemRect.Left + (LItemRect.Width - LTextW) / 2;
-        LY := LCenter.Y + LScaledTrackHeight / 2 + LScaledLabelGap + LFontSize;
+        LY := LCenter.Y + GetTrackHeight / 2 + LABEL_GAP + LFontSize;
       end;
     else
       begin
-        LX := LCenter.X + LScaledTrackWidth / 2 + LScaledLabelGap;
-        LY := LItemRect.Top + (LItemRect.Height + LFontSize) / 2 - DpiScaleValue(2);
+        LX := LCenter.X + GetTrackWidth / 2 + LABEL_GAP;
+        LY := LItemRect.Top + (LItemRect.Height + LFontSize) / 2 - 2;
       end;
     end;
 
@@ -638,10 +607,9 @@ var
   LThumbCenter: TPointF;
   LCornerRadius: Single;
 begin
-  // 将尺寸值进行DPI缩放
-  LTrackWidth := DpiScaleValue(GetTrackWidth);
-  LTrackHeight := DpiScaleValue(GetTrackHeight);
-  LThumbRadius := DpiScaleValue(GetThumbRadius);
+  LTrackWidth := GetTrackWidth;
+  LTrackHeight := GetTrackHeight;
+  LThumbRadius := GetThumbRadius;
   LCornerRadius := LTrackHeight / 2;
 
   LTrackRect := RectF(
@@ -671,7 +639,7 @@ begin
 
   LPaint.Style := TSkPaintStyle.Fill;
   LPaint.Color := $40000000;
-  ACanvas.DrawCircle(PointF(LThumbCenter.X, LThumbCenter.Y + DpiScaleValue(1)), LThumbRadius + DpiScaleValue(0.5), LPaint);
+  ACanvas.DrawCircle(PointF(LThumbCenter.X, LThumbCenter.Y + 1), LThumbRadius + 0.5, LPaint);
 
   LPaint.Style := TSkPaintStyle.Fill;
   if (not Enabled) or IsParentDisabled then

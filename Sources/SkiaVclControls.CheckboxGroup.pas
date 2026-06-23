@@ -4,7 +4,7 @@ interface
 
 uses
   System.Classes, System.SysUtils, System.Types, System.UITypes, System.Math,
-  System.Math.Vectors, System.Generics.Collections,
+  System.Generics.Collections,
   Vcl.Controls, Vcl.Graphics, Vcl.Skia, System.Skia,
   Winapi.Messages, Winapi.Windows,
   SkiaVclControls.Types, SkiaVclControls.Base;
@@ -349,7 +349,7 @@ begin
   else
   begin
     LFont := GetCaptionFontCache;
-    Result := LFont.Size + DpiScaleValue(FCaptionMargin);
+    Result := LFont.Size + FCaptionMargin;
   end;
 end;
 
@@ -357,42 +357,30 @@ function TDSkCheckboxGroup.GetItemRect(Index: Integer): TRectF;
 var
   LTitleHeight: Single;
   LItemHeight: Single;
-  LScaledCheckboxSize: Single;
-  LScaledSpacingV: Single;
-  LScaledSpacingH: Single;
-  LScaledItemWidth: Single;
 begin
   LTitleHeight := GetTitleHeight;
-  LScaledCheckboxSize := DpiScaleValue(FCheckboxSize);
-  LScaledSpacingV := DpiScaleValue(ITEM_SPACING_V);
-  LScaledSpacingH := DpiScaleValue(ITEM_SPACING_H);
-  LScaledItemWidth := DpiScaleValue(ITEM_WIDTH);
-  LItemHeight := LScaledCheckboxSize + DpiScaleValue(8);
+  LItemHeight := FCheckboxSize + 8;
 
   if FOrientation = rgoVertical then
-    Result := RectF(0, LTitleHeight + Index * (LItemHeight + LScaledSpacingV), ClientWidth,
-      LTitleHeight + Index * (LItemHeight + LScaledSpacingV) + LItemHeight)
+    Result := RectF(0, LTitleHeight + Index * (LItemHeight + ITEM_SPACING_V), ClientWidth,
+      LTitleHeight + Index * (LItemHeight + ITEM_SPACING_V) + LItemHeight)
   else
-    Result := RectF(Index * (LScaledItemWidth + LScaledSpacingH), 0,
-      Index * (LScaledItemWidth + LScaledSpacingH) + LScaledItemWidth, ClientHeight);
+    Result := RectF(Index * (ITEM_WIDTH + ITEM_SPACING_H), 0,
+      Index * (ITEM_WIDTH + ITEM_SPACING_H) + ITEM_WIDTH, ClientHeight);
 end;
 
 function TDSkCheckboxGroup.GetCheckboxCenter(Index: Integer): TPointF;
 var
   LRect: TRectF;
-  LScaledCheckboxSize: Single;
-  LScaledGap: Single;
 begin
   LRect := GetItemRect(Index);
-  LScaledCheckboxSize := DpiScaleValue(FCheckboxSize);
-  LScaledGap := DpiScaleValue(4);
   case FLabelPlacement of
-    rlpRight: Result := PointF(LRect.Left + LScaledCheckboxSize / 2 + LScaledGap, LRect.Top + LRect.Height / 2);
-    rlpLeft: Result := PointF(LRect.Right - LScaledCheckboxSize / 2 - LScaledGap, LRect.Top + LRect.Height / 2);
-    rlpTop: Result := PointF(LRect.Left + LRect.Width / 2, LRect.Bottom - LScaledCheckboxSize / 2 - LScaledGap);
-    rlpBottom: Result := PointF(LRect.Left + LRect.Width / 2, LRect.Top + LScaledCheckboxSize / 2 + LScaledGap);
+    rlpRight: Result := PointF(LRect.Left + FCheckboxSize / 2 + 4, LRect.Top + LRect.Height / 2);
+    rlpLeft: Result := PointF(LRect.Right - FCheckboxSize / 2 - 4, LRect.Top + LRect.Height / 2);
+    rlpTop: Result := PointF(LRect.Left + LRect.Width / 2, LRect.Bottom - FCheckboxSize / 2 - 4);
+    rlpBottom: Result := PointF(LRect.Left + LRect.Width / 2, LRect.Top + FCheckboxSize / 2 + 4);
   else
-    Result := PointF(LRect.Left + LScaledCheckboxSize / 2 + LScaledGap, LRect.Top + LRect.Height / 2);
+    Result := PointF(LRect.Left + FCheckboxSize / 2 + 4, LRect.Top + LRect.Height / 2);
   end;
 end;
 
@@ -484,24 +472,11 @@ end;
 procedure TDSkCheckboxGroup.Draw(const ACanvas: ISkCanvas; const ADest: TRectF; const AOpacity: Single);
 var
   i: Integer;
-  LScale: Single;
-  LPhysicalDest: TRectF;
 begin
   ACanvas.Clear(TAlphaColors.Null);
-  // 撤销 canvas 的 DPI 缩放变换，使后续绘制使用物理像素坐标
-  LScale := ScaleFactor;
-  ACanvas.Save;
-  try
-    if LScale <> 1.0 then
-      ACanvas.Concat(TMatrix.CreateScaling(1 / LScale, 1 / LScale));
-    LPhysicalDest := RectF(ADest.Left * LScale, ADest.Top * LScale,
-      ADest.Right * LScale, ADest.Bottom * LScale);
-    DrawTitle(ACanvas, LPhysicalDest);
-    for i := 0 to FItems.Count - 1 do
-      DrawItem(ACanvas, LPhysicalDest, i);
-  finally
-    ACanvas.Restore;
-  end;
+  DrawTitle(ACanvas, ADest);
+  for i := 0 to FItems.Count - 1 do
+    DrawItem(ACanvas, ADest, i);
 end;
 
 procedure TDSkCheckboxGroup.DrawTitle(const ACanvas: ISkCanvas; const ADest: TRectF);
@@ -532,8 +507,6 @@ var
   LItemRect: TRectF;
   LChecked: Boolean;
   LText: string;
-  LScaledCheckboxSize: Single;
-  LScaledLabelGap: Single;
 begin
   if (Index < 0) or (Index >= FItems.Count) then Exit;
 
@@ -541,8 +514,6 @@ begin
   LColor := GetCheckboxColor;
   LCenter := GetCheckboxCenter(Index);
   LItemRect := GetItemRect(Index);
-  LScaledCheckboxSize := DpiScaleValue(FCheckboxSize);
-  LScaledLabelGap := DpiScaleValue(LABEL_GAP);
 
   // 确定颜色
   if (not Enabled) or IsParentDisabled then
@@ -571,25 +542,25 @@ begin
 
     case FLabelPlacement of
       rlpRight: begin
-        LX := LCenter.X + LScaledCheckboxSize / 2 + LScaledLabelGap;
-        LY := LItemRect.Top + (LItemRect.Height + LFontSize) / 2 - DpiScaleValue(2);
+        LX := LCenter.X + FCheckboxSize / 2 + LABEL_GAP;
+        LY := LItemRect.Top + (LItemRect.Height + LFontSize) / 2 - 2;
       end;
       rlpLeft: begin
-        LX := LCenter.X - LScaledCheckboxSize / 2 - LScaledLabelGap - LTextW;
-        LY := LItemRect.Top + (LItemRect.Height + LFontSize) / 2 - DpiScaleValue(2);
+        LX := LCenter.X - FCheckboxSize / 2 - LABEL_GAP - LTextW;
+        LY := LItemRect.Top + (LItemRect.Height + LFontSize) / 2 - 2;
       end;
       rlpTop: begin
         LX := LItemRect.Left + (LItemRect.Width - LTextW) / 2;
-        LY := LCenter.Y - LScaledCheckboxSize / 2 - LScaledLabelGap;
+        LY := LCenter.Y - FCheckboxSize / 2 - LABEL_GAP;
       end;
       rlpBottom: begin
         LX := LItemRect.Left + (LItemRect.Width - LTextW) / 2;
-        LY := LCenter.Y + LScaledCheckboxSize / 2 + LScaledLabelGap + LFontSize;
+        LY := LCenter.Y + FCheckboxSize / 2 + LABEL_GAP + LFontSize;
       end;
     else
       begin
-        LX := LCenter.X + LScaledCheckboxSize / 2 + LScaledLabelGap;
-        LY := LItemRect.Top + (LItemRect.Height + LFontSize) / 2 - DpiScaleValue(2);
+        LX := LCenter.X + FCheckboxSize / 2 + LABEL_GAP;
+        LY := LItemRect.Top + (LItemRect.Height + LFontSize) / 2 - 2;
       end;
     end;
 
@@ -604,11 +575,9 @@ var
   LPaint: ISkPaint;
   LRoundRect: ISkRoundRect;
   LCornerRadius: Single;
-  LScaledCheckboxSize: Single;
 begin
-  LScaledCheckboxSize := DpiScaleValue(FCheckboxSize);
-  LHalfSize := LScaledCheckboxSize / 2;
-  LCornerRadius := DpiScaleValue(3);
+  LHalfSize := FCheckboxSize / 2;
+  LCornerRadius := 3;
 
   LPaint := TSkPaint.Create;
   LPaint.AntiAlias := True;
@@ -632,17 +601,17 @@ begin
       LPaint.Color := AColor;
     ACanvas.DrawRoundRect(LRoundRect, LPaint);
 
-    // 绘制勾选或横线图标（传入缩放后的尺寸）
+    // 绘制勾选或横线图标
     if AIndeterminate then
-      DrawIndeterminateMark(ACanvas, ACenter, LScaledCheckboxSize)
+      DrawIndeterminateMark(ACanvas, ACenter, FCheckboxSize)
     else
-      DrawCheckMark(ACanvas, ACenter, LScaledCheckboxSize);
+      DrawCheckMark(ACanvas, ACenter, FCheckboxSize);
   end
   else
   begin
     // 未选中状态：空心圆角矩形
     LPaint.Style := TSkPaintStyle.Stroke;
-    LPaint.StrokeWidth := DpiScaleValue(2);
+    LPaint.StrokeWidth := 2;
     LPaint.Color := AColor;
     ACanvas.DrawRoundRect(LRoundRect, LPaint);
   end;
@@ -655,7 +624,6 @@ var
   LPaint: ISkPaint;
   LScale: Single;
 begin
-  // ASize 已经是缩放后的值，但内部坐标需要按比例缩放
   LScale := ASize / 24;
 
   LPathBuilder := TSkPathBuilder.Create;

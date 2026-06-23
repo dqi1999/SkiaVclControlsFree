@@ -25,16 +25,13 @@ package SkiaVclControlsFree;
 {$IMAGEBASE $400000}
 {$DEFINE DEBUG}
 {$ENDIF IMPLICITBUILDING}
-{$DESCRIPTION 'SkiaVclControlsFree - Material Design VCL Controls'}
+{$DESCRIPTION 'SkiaVclControls - Material Design VCL Controls'}
 {$IMPLICITBUILD ON}
 
 requires
   Skia.Package.RTL,
   rtl,
   vcl,
-  vclactnband,
-  vclx,
-  xmlrtl,
   Skia.Package.VCL;
 
 contains
@@ -42,14 +39,23 @@ contains
   SkiaVclControls.Base in 'Sources\SkiaVclControls.Base.pas',
   SkiaVclControls.Compositor in 'Sources\SkiaVclControls.Compositor.pas',
   SkiaVclControls.Button in 'Sources\SkiaVclControls.Button.pas',
+  SkiaVclControls.LabelControl in 'Sources\SkiaVclControls.LabelControl.pas',
   SkiaVclControls.Panel in 'Sources\SkiaVclControls.Panel.pas',
   SkiaVclControls.ButtonGroup in 'Sources\SkiaVclControls.ButtonGroup.pas',
   SkiaVclControls.Radio in 'Sources\SkiaVclControls.Radio.pas',
   SkiaVclControls.RadioGroup in 'Sources\SkiaVclControls.RadioGroup.pas',
+  SkiaVclControls.Slider in 'Sources\SkiaVclControls.Slider.pas',
   SkiaVclControls.Checkbox in 'Sources\SkiaVclControls.Checkbox.pas',
   SkiaVclControls.CheckboxGroup in 'Sources\SkiaVclControls.CheckboxGroup.pas',
   SkiaVclControls.Switch in 'Sources\SkiaVclControls.Switch.pas',
   SkiaVclControls.SwitchGroup in 'Sources\SkiaVclControls.SwitchGroup.pas',
+  SkiaVclControls.Select in 'Sources\SkiaVclControls.Select.pas',
+  SkiaVclControls.Edit in 'Sources\SkiaVclControls.Edit.pas',
+  SkiaVclControls.ProgressBar in 'Sources\SkiaVclControls.ProgressBar.pas',
+  SkiaVclControls.CircularProgress in 'Sources\SkiaVclControls.CircularProgress.pas',
+  SkiaVclControls.Stepper in 'Sources\SkiaVclControls.Stepper.pas',
+  SkiaVclControls.Tabs in 'Sources\SkiaVclControls.Tabs.pas',
+  SkiaVclControls.Snackbar in 'Sources\SkiaVclControls.Snackbar.pas',
   SkiaVclControls.MUIHelper in 'Sources\SkiaVclControls.MUIHelper.pas',
   SkiaVclControls.Register in 'Sources\SkiaVclControls.Register.pas';
 

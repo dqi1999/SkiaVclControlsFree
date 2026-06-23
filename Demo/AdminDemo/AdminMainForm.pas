@@ -4,14 +4,14 @@ interface
 
 uses
   System.Classes, System.SysUtils, System.UITypes,
-  Vcl.Forms, Vcl.Controls, Vcl.Graphics,
-  SkiaVclControls.LabelControl, SkiaVclControls.Panel, SkiaVclControls.Tabs,
-  SkiaVclControls.Types, SkiaVclControls.Base, System.Skia, Vcl.Skia,
-  Demo.Styles,
-  Demo.Frame.LabelControl, Demo.Frame.Button, Demo.Frame.Panel,
+  Vcl.Forms, Vcl.Controls, Vcl.Graphics, SkiaVclControls.LabelControl, SkiaVclControls.Panel, SkiaVclControls.Tabs, SkiaVclControls.Types,
+  SkiaVclControls.Base, System.Skia, Vcl.Skia, Demo.Styles,
+  Demo.Frame.Button, Demo.Frame.Panel, Demo.Frame.ButtonGroup,
   Demo.Frame.Radio, Demo.Frame.Checkbox, Demo.Frame.Switch,
-  Demo.Frame.Slider, Demo.Frame.Tabs,
-  System.ImageList, Vcl.ImgList, SVGIconImageListBase, SVGIconImageList;
+  Demo.Frame.Select, Demo.Frame.Edit, Demo.Frame.Slider,
+  Demo.Frame.Progress, Demo.Frame.Stepper, Demo.Frame.Tabs,
+  Demo.Frame.LabelControl, Demo.Frame.Snackbar, System.ImageList, Vcl.ImgList,
+  SVGIconImageListBase, SVGIconImageList;
 
 type
   TAdminDemoPage = record
@@ -36,20 +36,26 @@ type
     lblPageDescription: TDSkLabel;
     pnlFrameHost: TDSkPanel;
     sideNav: TDSkTabs;
-    frameLabel: TFrameLabelDemo;
     frameButton: TFrameButtonDemo;
     framePanel: TFramePanelDemo;
+    frameButtonGroup: TFrameButtonGroupDemo;
     frameRadio: TFrameRadioDemo;
     frameCheckbox: TFrameCheckboxDemo;
     frameSwitch: TFrameSwitchDemo;
+    frameSelect: TFrameSelectDemo;
+    frameEdit: TFrameEditDemo;
     frameSlider: TFrameSliderDemo;
+    frameProgress: TFrameProgressDemo;
+    frameStepper: TFrameStepperDemo;
     frameTabs: TFrameTabsDemo;
+    frameLabel: TFrameLabelDemo;
+    frameSnackbar: TFrameSnackbarDemo;
     SVGIconImageList1: TSVGIconImageList;
     procedure FormCreate(Sender: TObject);
     procedure sideNavItemClick(Sender: TObject; TabIndex: Integer);
   private
-    FFrames: array[0..7] of TFrame;
-    FPages: array[0..7] of TAdminDemoPage;
+    FFrames: array[0..13] of TFrame;
+    FPages: array[0..13] of TAdminDemoPage;
     procedure ApplyShellStyle;
     procedure CreateFrames;
     procedure AddPage(AIndex: Integer; const ANavText, ATitle, ADescription: string; AFrame: TFrame; AImageIndex: Integer = -1);
@@ -213,9 +219,27 @@ begin
   AddPage(6, 'Slider', 'Slider',
     'Continuous, discrete, range and vertical slider interactions.',
     frameSlider, 8);
-  AddPage(7, 'Tabs', 'Tabs',
+  AddPage(7, 'Progress', 'Progress',
+    'Linear and circular progress indicators for task status.',
+    frameProgress, 9);
+  AddPage(8, 'Select', 'Select',
+    'Outlined, filled and underline select fields.',
+    frameSelect, 4);
+  AddPage(9, 'Edit', 'Edit',
+    'Text input, floating labels, selection and password states.',
+    frameEdit, 3);
+  AddPage(10, 'Snackbar', 'Snackbar',
+    'Transient feedback messages with severity and placement options.',
+    frameSnackbar, 10);
+  AddPage(11, 'Button Group', 'Button Group',
+    'Grouped actions with connected button layouts and selection modes.',
+    frameButtonGroup, 11);
+  AddPage(12, 'Tabs', 'Tabs',
     'Horizontal, vertical and navigation tab patterns.',
     frameTabs, 12);
+  AddPage(13, 'Stepper', 'Stepper',
+    'Linear and non-linear step flows with status styling.',
+    frameStepper, 13);
 
   ConfigureSideNavItems;
 

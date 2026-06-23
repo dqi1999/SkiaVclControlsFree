@@ -1,7 +1,7 @@
 object FormAdminDemo: TFormAdminDemo
   Left = 0
   Top = 0
-  Caption = 'SkiaVclControlsfree Admin Demo'
+  Caption = 'SkiaVclControls Admin Demo'
   ClientHeight = 859
   ClientWidth = 1320
   Color = 16251388
@@ -57,7 +57,7 @@ object FormAdminDemo: TFormAdminDemo
         Top = 18
         Width = 125
         Height = 17
-        Caption = 'SkiaVclControls'
+        Caption = 'Skia Controls'
         Font.Charset = DEFAULT_CHARSET
         Font.Color = 12608789
         Font.Height = -19
@@ -108,11 +108,17 @@ object FormAdminDemo: TFormAdminDemo
         'Label:1'
         'Button:0'
         'Panel:2'
-        'Radio:3'
-        'Checkbox:4'
-        'Switch:5'
-        'Slider:6'
-        'Tabs:7')
+        'Radio:5'
+        'Checkbox:6'
+        'Switch:7'
+        'Slider:8'
+        'Progress:9'
+        'Select:4'
+        'Edit:3'
+        'Snackbar:10'
+        'Button Group:11'
+        'Tabs:12'
+        'Stepper:13')
       ItemIndex = 0
       Alignment = taFullWidth
       Orientation = toVertical
@@ -175,7 +181,7 @@ object FormAdminDemo: TFormAdminDemo
         Top = 16
         Width = 369
         Height = 19
-        Caption = 'SkiaVclControlsfree Demo'
+        Caption = 'SkiaVclControls Admin Dashboard'
         Font.Charset = DEFAULT_CHARSET
         Font.Color = 2171169
         Font.Height = -21
@@ -261,7 +267,7 @@ object FormAdminDemo: TFormAdminDemo
           Top = 4
           Width = 92
           Height = 22
-          Caption = 'Label'
+          Caption = 'Button'
           Font.Charset = DEFAULT_CHARSET
           Font.Color = 2171169
           Font.Height = -27
@@ -284,7 +290,7 @@ object FormAdminDemo: TFormAdminDemo
           Top = 43
           Width = 355
           Height = 15
-          Caption = 'Skia-powered text with gradients, outlines, shadows and alignment.'
+          Caption = 'Filled, outlined, text, toggle, icon and interaction states.'
           Font.Charset = DEFAULT_CHARSET
           Font.Color = 7697781
           Font.Height = -13
@@ -324,56 +330,6 @@ object FormAdminDemo: TFormAdminDemo
         BorderColor = xFFE4E9F1
         BorderWidth = 1.000000000000000000
         ExplicitHeight = 658
-        inline frameLabel: TFrameLabelDemo
-          Left = 0
-          Top = 0
-          Width = 1060
-          Height = 697
-          Align = alClient
-          Color = clBtnFace
-          ParentColor = False
-          TabOrder = 0
-          ExplicitWidth = 1060
-          ExplicitHeight = 658
-          inherited pnlHeader: TDSkPanel
-            Width = 1060
-            ExplicitWidth = 1060
-          end
-          inherited pnlControl: TDSkPanel
-            Height = 633
-            ExplicitHeight = 594
-            inherited pnlControlBadge: TDSkPanel
-              ChildPadding = 8.000000000000000000
-            end
-          end
-          inherited pnlPreview: TDSkPanel
-            Width = 780
-            Height = 633
-            ExplicitWidth = 780
-            ExplicitHeight = 594
-            inherited cardHero: TDSkPanel
-              ChildPadding = 8.000000000000000000
-            end
-            inherited cardOutline: TDSkPanel
-              ChildPadding = 8.000000000000000000
-            end
-            inherited cardNeon: TDSkPanel
-              ChildPadding = 8.000000000000000000
-              inherited lblNeon: TDSkLabel
-                ShadowOffsetY = 2.000000000000000000
-              end
-            end
-            inherited cardAlign: TDSkPanel
-              ChildPadding = 8.000000000000000000
-              inherited pnlAlignBox: TDSkPanel
-                ChildPadding = 8.000000000000000000
-              end
-            end
-            inherited cardDisabled: TDSkPanel
-              ChildPadding = 8.000000000000000000
-            end
-          end
-        end
         inline frameButton: TFrameButtonDemo
           Left = 0
           Top = 0
@@ -381,7 +337,6 @@ object FormAdminDemo: TFormAdminDemo
           Height = 697
           Align = alClient
           TabOrder = 1
-          Visible = False
           ExplicitWidth = 1060
           ExplicitHeight = 658
           inherited pnlHeader: TDSkPanel
@@ -431,6 +386,31 @@ object FormAdminDemo: TFormAdminDemo
             ExplicitHeight = 594
           end
         end
+        inline frameButtonGroup: TFrameButtonGroupDemo
+          Left = 0
+          Top = 0
+          Width = 1060
+          Height = 697
+          Align = alClient
+          TabOrder = 3
+          Visible = False
+          ExplicitWidth = 1060
+          ExplicitHeight = 658
+          inherited pnlHeader: TDSkPanel
+            Width = 1060
+            ExplicitWidth = 1060
+          end
+          inherited pnlControl: TDSkPanel
+            Height = 633
+            ExplicitHeight = 594
+          end
+          inherited pnlPreview: TDSkPanel
+            Width = 772
+            Height = 633
+            ExplicitWidth = 772
+            ExplicitHeight = 594
+          end
+        end
         inline frameRadio: TFrameRadioDemo
           Left = 0
           Top = 0
@@ -439,7 +419,7 @@ object FormAdminDemo: TFormAdminDemo
           Align = alClient
           Color = clBtnFace
           ParentColor = False
-          TabOrder = 3
+          TabOrder = 4
           Visible = False
           ExplicitWidth = 1060
           ExplicitHeight = 658
@@ -466,7 +446,7 @@ object FormAdminDemo: TFormAdminDemo
           Align = alClient
           Color = clBtnFace
           ParentColor = False
-          TabOrder = 4
+          TabOrder = 5
           Visible = False
           ExplicitWidth = 1060
           ExplicitHeight = 658
@@ -495,10 +475,70 @@ object FormAdminDemo: TFormAdminDemo
           Align = alClient
           Color = clBtnFace
           ParentColor = False
-          TabOrder = 5
+          TabOrder = 6
           Visible = False
           ExplicitWidth = 1060
           ExplicitHeight = 658
+        end
+        inline frameSelect: TFrameSelectDemo
+          Left = 0
+          Top = 0
+          Width = 1060
+          Height = 697
+          Align = alClient
+          Color = clBtnFace
+          ParentColor = False
+          TabOrder = 7
+          Visible = False
+          ExplicitWidth = 1060
+          ExplicitHeight = 658
+          inherited pnlHeader: TDSkPanel
+            Width = 1060
+            ExplicitWidth = 1060
+          end
+          inherited pnlControl: TDSkPanel
+            Height = 547
+            ExplicitTop = 150
+            ExplicitHeight = 508
+          end
+          inherited pnlPreview: TDSkPanel
+            Width = 860
+            Height = 547
+            ExplicitLeft = 200
+            ExplicitTop = 150
+            ExplicitWidth = 860
+            ExplicitHeight = 508
+          end
+        end
+        inline frameEdit: TFrameEditDemo
+          Left = 0
+          Top = 0
+          Width = 1060
+          Height = 697
+          Align = alClient
+          Color = clBtnFace
+          ParentColor = False
+          TabOrder = 8
+          Visible = False
+          ExplicitWidth = 1060
+          ExplicitHeight = 658
+          inherited pnlHeader: TDSkPanel
+            Width = 1060
+            ExplicitWidth = 1060
+          end
+          inherited pnlControl: TDSkPanel
+            Height = 649
+            ExplicitHeight = 610
+            inherited rgSize: TDSkRadioGroup
+              ExplicitTop = 143
+            end
+          end
+          inherited pnlPreview: TDSkPanel
+            Width = 780
+            Height = 649
+            ExplicitWidth = 780
+            ExplicitHeight = 610
+          end
         end
         inline frameSlider: TFrameSliderDemo
           Left = 0
@@ -508,18 +548,20 @@ object FormAdminDemo: TFormAdminDemo
           Align = alClient
           Color = clBtnFace
           ParentColor = False
-          TabOrder = 6
+          TabOrder = 9
           Visible = False
           ExplicitWidth = 1060
           ExplicitHeight = 658
         end
-        inline frameTabs: TFrameTabsDemo
+        inline frameProgress: TFrameProgressDemo
           Left = 0
           Top = 0
           Width = 1060
           Height = 697
           Align = alClient
-          TabOrder = 7
+          Color = clBtnFace
+          ParentColor = False
+          TabOrder = 10
           Visible = False
           ExplicitWidth = 1060
           ExplicitHeight = 658
@@ -537,6 +579,133 @@ object FormAdminDemo: TFormAdminDemo
             ExplicitWidth = 780
             ExplicitHeight = 594
           end
+        end
+        inline frameStepper: TFrameStepperDemo
+          Left = 0
+          Top = 0
+          Width = 1060
+          Height = 697
+          Align = alClient
+          Color = clBtnFace
+          ParentColor = False
+          TabOrder = 11
+          Visible = False
+          ExplicitWidth = 1060
+          ExplicitHeight = 658
+          inherited pnlHeader: TDSkPanel
+            Width = 1060
+            ExplicitWidth = 1060
+          end
+          inherited pnlControl: TDSkPanel
+            Height = 640
+            ExplicitHeight = 601
+          end
+          inherited pnlPreview: TDSkPanel
+            Width = 860
+            Height = 640
+            ExplicitWidth = 860
+            ExplicitHeight = 601
+            inherited lblPreviewTitle: TDSkLabel
+              Width = 854
+              ExplicitWidth = 854
+            end
+            inherited stepperMain: TDSkStepper
+              Top = 24
+              Width = 854
+              ExplicitLeft = 3
+              ExplicitTop = 24
+              ExplicitWidth = 854
+            end
+          end
+        end
+        inline frameTabs: TFrameTabsDemo
+          Left = 0
+          Top = 0
+          Width = 1060
+          Height = 697
+          Align = alClient
+          TabOrder = 12
+          Visible = False
+          ExplicitWidth = 1060
+          ExplicitHeight = 658
+          inherited pnlHeader: TDSkPanel
+            Width = 1060
+            ExplicitWidth = 1060
+          end
+          inherited pnlControl: TDSkPanel
+            Height = 633
+            ExplicitHeight = 594
+          end
+          inherited pnlPreview: TDSkPanel
+            Width = 780
+            Height = 633
+            ExplicitWidth = 780
+            ExplicitHeight = 594
+          end
+        end
+        inline frameLabel: TFrameLabelDemo
+          Left = 0
+          Top = 0
+          Width = 1060
+          Height = 697
+          Align = alClient
+          Color = clBtnFace
+          ParentColor = False
+          TabOrder = 13
+          Visible = False
+          ExplicitWidth = 1060
+          ExplicitHeight = 658
+          inherited pnlHeader: TDSkPanel
+            Width = 1060
+            ExplicitWidth = 1060
+          end
+          inherited pnlControl: TDSkPanel
+            Height = 633
+            ExplicitHeight = 594
+            inherited pnlControlBadge: TDSkPanel
+              ChildPadding = 8.000000000000000000
+            end
+          end
+          inherited pnlPreview: TDSkPanel
+            Width = 780
+            Height = 633
+            ExplicitWidth = 780
+            ExplicitHeight = 594
+            inherited cardHero: TDSkPanel
+              ChildPadding = 8.000000000000000000
+            end
+            inherited cardOutline: TDSkPanel
+              ChildPadding = 8.000000000000000000
+            end
+            inherited cardNeon: TDSkPanel
+              ChildPadding = 8.000000000000000000
+              inherited lblNeon: TDSkLabel
+                ShadowOffsetY = 2.000000000000000000
+              end
+            end
+            inherited cardAlign: TDSkPanel
+              ChildPadding = 8.000000000000000000
+              inherited pnlAlignBox: TDSkPanel
+                ChildPadding = 8.000000000000000000
+              end
+            end
+            inherited cardDisabled: TDSkPanel
+              ChildPadding = 8.000000000000000000
+            end
+          end
+        end
+        inline frameSnackbar: TFrameSnackbarDemo
+          Left = 0
+          Top = 0
+          Width = 1060
+          Height = 697
+          Align = alClient
+          Color = clBtnFace
+          ParentColor = False
+          TabOrder = 0
+          Visible = False
+          ExplicitWidth = 1060
+          ExplicitHeight = 658
         end
       end
     end
@@ -564,6 +733,21 @@ object FormAdminDemo: TFormAdminDemo
           '<svg viewBox="0 0 24 24"><path fill="currentColor" d="M4 4h16a2 ' +
           '2 0 0 1 2 2v12a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2zm0 ' +
           '5v9h16V9H4zm0-3v1h16V6H4z"/></svg>'
+      end
+      item
+        IconName = 'edit'
+        SVGText = 
+          '<svg viewBox="0 0 24 24"><path fill="currentColor" d="M4 5h10v2H' +
+          '6v10h12v-5h2v7H4V5zm13.7-.3 1.6 1.6-7.9 7.9-2.4.8.8-2.4 7.9-7.9z' +
+          'M20.4 3.6l.8.8a1 1 0 0 1 0 1.4l-.7.7-2.3-2.3.8-.6a1 1 0 0 1 1.4 ' +
+          '0z"/></svg>'
+      end
+      item
+        IconName = 'select'
+        SVGText = 
+          '<svg viewBox="0 0 24 24"><path fill="currentColor" d="M5 5h14a2 ' +
+          '2 0 0 1 2 2v4H3V7a2 2 0 0 1 2-2zm0 2v2h14V7H5zm-2 6h18v4a2 2 0 0' +
+          ' 1-2 2H5a2 2 0 0 1-2-2v-4zm5 1.5L12 18l4-3.5H8z"/></svg>'
       end
       item
         IconName = 'radio'
@@ -594,10 +778,39 @@ object FormAdminDemo: TFormAdminDemo
           '1 1 0 6 3 3 0 0 1 0-6zm6 2h2v2h-2v-2z"/></svg>'
       end
       item
+        IconName = 'progress'
+        SVGText = 
+          '<svg viewBox="0 0 24 24"><path fill="currentColor" d="M5 5h14v2H' +
+          '5V5zm0 6h14v8H5v-8zm2 2v4h7v-4H7zm9 0v4h1v-4h-1z"/></svg>'
+      end
+      item
+        IconName = 'snackbar'
+        SVGText = 
+          '<svg viewBox="0 0 24 24"><path fill="currentColor" d="M5 5h14a2 ' +
+          '2 0 0 1 2 2v7a2 2 0 0 1-2 2h-7l-4 3v-3H5a2 2 0 0 1-2-2V7a2 2 0 0' +
+          ' 1 2-2zm0 2v7h5v1l1.3-1H19V7H5zm2 2h10v2H7V9z"/></svg>'
+      end
+      item
+        IconName = 'button-group'
+        SVGText = 
+          '<svg viewBox="0 0 24 24"><path fill="currentColor" d="M4 7h16a2 ' +
+          '2 0 0 1 2 2v6a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V9a2 2 0 0 1 2-2zm0 2' +
+          'v6h5V9H4zm7 0v6h5V9h-5zm7 0v6h2V9h-2z"/></svg>'
+      end
+      item
         IconName = 'tabs'
         SVGText = 
           '<svg viewBox="0 0 24 24"><path fill="currentColor" d="M3 5h7v4H3' +
           'V5zm9 0h9v4h-9V5zM3 11h18v8H3v-8zm2 2v4h14v-4H5z"/></svg>'
+      end
+      item
+        IconName = 'stepper'
+        SVGText = 
+          '<svg viewBox="0 0 24 24"><path fill="currentColor" d="M6 5a3 3 0' +
+          ' 0 1 2.8 2h6.4A3 3 0 1 1 18 11a3 3 0 0 1-2.8-2H8.8A3 3 0 1 1 6 5' +
+          'zm0 2a1 1 0 1 0 0 2 1 1 0 0 0 0-2zm12 0a1 1 0 1 0 0 2 1 1 0 0 0 ' +
+          '0-2zM6 14a3 3 0 0 1 2.8 2H20v2H8.8A3 3 0 1 1 6 14zm0 2a1 1 0 1 0' +
+          ' 0 2 1 1 0 0 0 0-2z"/></svg>'
       end>
     Scaled = True
     Left = 932

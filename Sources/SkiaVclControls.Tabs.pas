@@ -4,7 +4,6 @@ interface
 
 uses
   System.Classes, System.SysUtils, System.Types, System.UITypes, System.Math,
-  System.Math.Vectors,
   Vcl.Controls, Vcl.Graphics, Vcl.ImgList, Vcl.Skia, System.Skia,
   Winapi.Messages, Winapi.Windows,
   SkiaVclControls.Types, SkiaVclControls.Base;
@@ -610,10 +609,8 @@ procedure TDSkTabs.Draw(const ACanvas: ISkCanvas; const ADest: TRectF; const AOp
 var
   LUseVisualState: Boolean;
   LPaint: ISkPaint;
-  LScale: Single;
-  LPhysicalDest: TRectF;
 begin
-  // BottomNav 样式：绘制深色背景（使用逻辑坐标，由 canvas 缩放处理）
+  // BottomNav 样式：绘制深色背景
   if FVariant = tvBottomNav then
   begin
     LPaint := TSkPaint.Create;
@@ -639,21 +636,8 @@ begin
     ACanvas.DrawRect(ADest, LPaint);
   end;
 
-  // 撤销 canvas 的 DPI 缩放变换，使后续绘制使用物理像素坐标。
-  // GetTabRect、FontSizeToPixels、DpiScaleValue 等函数返回的都是物理像素值，
-  // canvas 的 ScaleFactor 变换会导致二次缩放，必须在此抵消。
-  LScale := ScaleFactor;
-  ACanvas.Save;
-  try
-    if LScale <> 1.0 then
-      ACanvas.Concat(TMatrix.CreateScaling(1 / LScale, 1 / LScale));
-    LPhysicalDest := RectF(ADest.Left * LScale, ADest.Top * LScale,
-      ADest.Right * LScale, ADest.Bottom * LScale);
-    DrawTabs(ACanvas, LPhysicalDest);
-    DrawIndicator(ACanvas, LPhysicalDest);
-  finally
-    ACanvas.Restore;
-  end;
+  DrawTabs(ACanvas, ADest);
+  DrawIndicator(ACanvas, ADest);
 end;
 
 procedure TDSkTabs.DrawTabs(const ACanvas: ISkCanvas; const ADest: TRectF);

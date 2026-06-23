@@ -50,25 +50,14 @@ object FramePanelDemo: TFramePanelDemo
     object lblOptions: TDSkLabel
       Left = 26
       Top = 724
-      Width = 48
-      Height = 14
+      Width = 43
+      Height = 15
       Caption = 'Options'
       Font.Charset = DEFAULT_CHARSET
       Font.Color = clWindowText
       Font.Height = -12
       Font.Name = 'Segoe UI'
       Font.Style = [fsBold]
-      FontColor = claNull
-      GradientStartColor = xFF1976D2
-      GradientEndColor = xFF42A5F5
-      StrokeColor = claWhite
-      StrokeWidth = 1.000000000000000000
-      ShadowColor = x60000000
-      ShadowBlur = 4.000000000000000000
-      ShadowOffsetY = 2.000000000000000000
-      BackgroundColor = claNull
-      BorderColor = claNull
-      BorderWidth = 0.000000000000000000
     end
     object rgStyle: TDSkRadioGroup
       AlignWithMargins = True
@@ -140,6 +129,28 @@ object FramePanelDemo: TFramePanelDemo
       BorderColor = claNull
       BorderWidth = 0.000000000000000000
     end
+    object edtCaption: TDSkEdit
+      AlignWithMargins = True
+      Left = 3
+      Top = 648
+      Width = 274
+      Height = 62
+      Align = alTop
+      Text = 'Panel Title'
+      Label_ = 'Caption Text'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = 5722185
+      Font.Height = -17
+      Font.Name = 'Microsoft YaHei UI'
+      Font.Style = []
+      LabelFont.Charset = DEFAULT_CHARSET
+      LabelFont.Color = -9079435
+      LabelFont.Height = -16
+      LabelFont.Name = 'Microsoft YaHei UI'
+      LabelFont.Style = []
+      OnChange = edtCaptionChange
+      TabOrder = 2
+    end
     object chkHover: TDSkCheckbox
       Left = 26
       Top = 748
@@ -194,24 +205,13 @@ object FramePanelDemo: TFramePanelDemo
       Left = 40
       Top = 24
       Width = 92
-      Height = 13
+      Height = 20
       Caption = 'Preview Area'
       Font.Charset = DEFAULT_CHARSET
       Font.Color = clWindowText
       Font.Height = -15
       Font.Name = 'Segoe UI'
       Font.Style = [fsBold]
-      FontColor = claNull
-      GradientStartColor = xFF1976D2
-      GradientEndColor = xFF42A5F5
-      StrokeColor = claWhite
-      StrokeWidth = 1.000000000000000000
-      ShadowColor = x60000000
-      ShadowBlur = 4.000000000000000000
-      ShadowOffsetY = 2.000000000000000000
-      BackgroundColor = claNull
-      BorderColor = claNull
-      BorderWidth = 0.000000000000000000
     end
     object pnlMain: TDSkPanel
       Left = 40

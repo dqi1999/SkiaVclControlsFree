@@ -5,7 +5,7 @@ interface
 uses
   System.Classes, System.SysUtils, System.UITypes,
   Vcl.Forms, Vcl.Controls, Vcl.Graphics, SkiaVclControls.LabelControl, SkiaVclControls.Panel, SkiaVclControls.Types,
-  SkiaVclControls.RadioGroup, SkiaVclControls.Checkbox,
+  SkiaVclControls.RadioGroup, SkiaVclControls.Checkbox, SkiaVclControls.Edit,
   Demo.Styles, System.Skia, Vcl.Skia, SkiaVclControls.Base;
 
 type
@@ -15,6 +15,7 @@ type
     pnlPreview: TDSkPanel;
     rgStyle: TDSkRadioGroup;
     rgCaptionPos: TDSkRadioGroup;
+    edtCaption: TDSkEdit;
     lblOptions: TDSkLabel;
     chkHover: TDSkCheckbox;
     chkBorder: TDSkCheckbox;
@@ -98,7 +99,7 @@ end;
 
 procedure TFramePanelDemo.edtCaptionChange(Sender: TObject; const AText: string);
 begin
-  pnlMain.Caption := 'Panel Title';
+  pnlMain.Caption := edtCaption.Text;
 end;
 
 procedure TFramePanelDemo.chkHoverCheckChanged(Sender: TObject);
