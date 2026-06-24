@@ -65,5 +65,3 @@ docs/
 screenshot*.py
 list_windows.py
 
-# Skill 系统文件
-SKILL.md
